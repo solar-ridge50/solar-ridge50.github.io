@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>王雨纯mm131-写真图集归档与检索</title>
+<meta name="description" content="王雨纯mm131写真图集归档站，收录图集编号、发布时间、套图张数与拍摄主题，提供检索、更新记录、套图解析与读者评论，帮助按编号与主题定位内容。">
+<meta name="keywords" content="王雨纯mm131">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2a3d'/%3E%3Ccircle cx='32' cy='26' r='10' fill='%23f4b6a8'/%3E%3Cpath d='M14 56c2-12 9-18 18-18s16 6 18 18z' fill='%23f4b6a8'/%3E%3Cpath d='M20 14h24v4H20z' fill='%23e6a08e'/%3E%3C/svg%3E">
+<style>
+:root{
+  --c-bg:#fbf6f2;
+  --c-paper:#ffffff;
+  --c-ink:#2b2a3d;
+  --c-ink-2:#565468;
+  --c-line:#e7dcd4;
+  --c-main:#b5544a;
+  --c-main-d:#8e3b33;
+  --c-soft:#f6e6de;
+  --c-soft-2:#fdf1ea;
+  --c-accent:#3f6b6a;
+  --c-warn:#a56a12;
+  --r-s:6px;
+  --r-m:12px;
+  --r-l:20px;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;
+  --sh-1:0 1px 2px rgba(43,42,61,.06),0 4px 14px rgba(43,42,61,.05);
+  --sh-2:0 2px 6px rgba(43,42,61,.08),0 12px 30px rgba(43,42,61,.07);
+  --ff:"Songti SC","Noto Serif SC",Georgia,"Times New Roman",serif;
+  --ff-s:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --announce-h:38px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--c-bg);color:var(--c-ink);
+  font-family:var(--ff);font-size:16px;line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--c-main-d);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.4;margin:0}
+p{margin:0 0 var(--sp-4)}
+ul,ol{margin:0 0 var(--sp-4);padding-left:1.3em}
+li{margin-bottom:var(--sp-2)}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--c-accent);outline-offset:2px;border-radius:4px}
+
+/* ---------- 公告条 + 页头 ---------- */
+.sticky-wrap{position:sticky;top:0;z-index:60}
+.announce{
+  height:var(--announce-h);display:flex;align-items:center;justify-content:center;
+  background:var(--c-ink);color:#f4ede8;font-family:var(--ff-s);font-size:13px;
+  letter-spacing:.02em;padding:0 var(--sp-4);text-align:center;gap:var(--sp-2);
+}
+.announce b{color:#f4b6a8;font-weight:600}
+.announce span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-header{
+  background:rgba(251,246,242,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--c-line);
+}
+.header-inner{
+  max-width:1180px;margin:0 auto;padding:10px var(--sp-5);
+  display:flex;align-items:center;gap:var(--sp-4);flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-mark{width:38px;height:38px;flex-shrink:0}
+.brand-text{font-family:var(--ff-s);font-weight:700;font-size:19px;color:var(--c-ink);letter-spacing:.01em}
+.brand-sub{display:block;font-size:11px;font-weight:400;color:var(--c-ink-2);letter-spacing:.08em;line-height:1.2}
+.nav{
+  display:flex;gap:2px;flex-wrap:wrap;font-family:var(--ff-s);font-size:14px;margin-left:auto;
+}
+.nav a{
+  color:var(--c-ink-2);padding:6px 10px;border-radius:var(--r-s);text-decoration:none;white-space:nowrap;
+}
+.nav a:hover{background:var(--c-soft);color:var(--c-main-d)}
+.header-tools{display:flex;align-items:center;gap:var(--sp-2)}
+.search{display:flex;align-items:center;background:var(--c-paper);border:1px solid var(--c-line);border-radius:999px;padding:2px 4px 2px 12px}
+.search input{
+  border:0;background:transparent;font-family:var(--ff-s);font-size:13px;color:var(--c-ink);
+  width:132px;padding:6px 0;outline:none;
+}
+.search button{
+  border:0;background:var(--c-main);color:#fff;border-radius:999px;
+  font-family:var(--ff-s);font-size:12px;padding:6px 12px;cursor:pointer;
+}
+.search button:hover{background:var(--c-main-d)}
+.menu-btn{
+  display:none;border:1px solid var(--c-line);background:var(--c-paper);color:var(--c-ink);
+  border-radius:var(--r-s);padding:6px 10px;font-family:var(--ff-s);font-size:13px;cursor:pointer;
+}
+.search-feedback{
+  max-width:1180px;margin:0 auto;padding:0 var(--sp-5);
+}
+#searchNote{
+  display:none;font-family:var(--ff-s);font-size:13px;color:var(--c-main-d);
+  background:var(--c-soft-2);border:1px solid var(--c-soft);border-radius:var(--r-s);
+  padding:6px 12px;margin:6px 0 0;
+}
+#searchNote.on{display:block}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  max-width:1180px;margin:0 auto;padding:var(--sp-7) var(--sp-5) var(--sp-6);
+  display:grid;grid-template-columns:1.15fr .85fr;gap:var(--sp-6);align-items:center;
+}
+.hero-kicker{
+  font-family:var(--ff-s);font-size:12px;letter-spacing:.18em;color:var(--c-main-d);
+  text-transform:uppercase;margin-bottom:var(--sp-3);
+}
+h1{
+  font-size:clamp(30px,4.4vw,46px);font-weight:700;letter-spacing:.02em;margin-bottom:var(--sp-4);
+}
+.hero-desc{font-size:16px;color:var(--c-ink-2);max-width:44ch;margin-bottom:var(--sp-5)}
+.hero-actions{display:flex;gap:var(--sp-3);flex-wrap:wrap;font-family:var(--ff-s);font-size:14px}
+.btn{
+  display:inline-block;padding:10px 20px;border-radius:999px;text-decoration:none;
+  transition:transform .18s ease, background .18s ease;
+}
+.btn-primary{background:var(--c-main);color:#fff}
+.btn-primary:hover{background:var(--c-main-d);transform:translateY(-2px);text-decoration:none}
+.btn-ghost{border:1px solid var(--c-main);color:var(--c-main-d)}
+.btn-ghost:hover{background:var(--c-soft);transform:translateY(-2px);text-decoration:none}
+.hero-stats{
+  display:flex;gap:var(--sp-5);margin-top:var(--sp-6);font-family:var(--ff-s);
+  border-top:1px dashed var(--c-line);padding-top:var(--sp-4);flex-wrap:wrap;
+}
+.hero-stats b{display:block;font-size:22px;color:var(--c-main-d);font-family:var(--ff);line-height:1.2}
+.hero-stats span{font-size:12px;color:var(--c-ink-2)}
+.hero-art{position:relative;aspect-ratio:4/4.4}
+.hero-art svg{width:100%;height:100%}
+
+/* ---------- 内容布局 ---------- */
+.layout{
+  max-width:1180px;margin:0 auto;padding:0 var(--sp-5) var(--sp-8);
+  display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--sp-6);align-items:start;
+}
+.main-col{min-width:0}
+aside{position:sticky;top:calc(var(--announce-h) + 66px)}
+.section{margin-bottom:var(--sp-7);scroll-margin-top:calc(var(--announce-h) + 76px)}
+.sec-head{display:flex;align-items:baseline;gap:var(--sp-3);margin-bottom:var(--sp-4);border-bottom:2px solid var(--c-ink);padding-bottom:var(--sp-2)}
+.sec-head h2{font-size:22px;font-weight:700;letter-spacing:.01em}
+.sec-head .sec-tag{font-family:var(--ff-s);font-size:11px;color:var(--c-ink-2);letter-spacing:.1em;margin-left:auto}
+.sub-h3{font-size:17px;margin:var(--sp-5) 0 var(--sp-3)}
+.lead{color:var(--c-ink-2);font-size:15px}
+
+/* 卡片网格 */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4)}
+.card{
+  background:var(--c-paper);border:1px solid var(--c-line);border-radius:var(--r-m);
+  overflow:hidden;box-shadow:var(--sh-1);transition:transform .18s ease,box-shadow .18s ease;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+.card-body{padding:var(--sp-4);display:flex;flex-direction:column;gap:var(--sp-2);flex:1}
+.card-body h3{font-size:16px}
+.card-body p{font-size:13.5px;color:var(--c-ink-2);margin:0;line-height:1.7}
+.meta{font-family:var(--ff-s);font-size:12px;color:var(--c-ink-2);display:flex;gap:var(--sp-3);flex-wrap:wrap}
+.pill{
+  display:inline-block;font-family:var(--ff-s);font-size:11px;padding:2px 9px;border-radius:999px;
+  background:var(--c-soft);color:var(--c-main-d);white-space:nowrap;
+}
+.pill-green{background:#e4eeed;color:var(--c-accent)}
+.pill-warn{background:#f8eed8;color:var(--c-warn)}
+.card-img{width:100%;height:140px;object-fit:cover;background:var(--c-soft)}
+.card-thumb{height:132px;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.card:hover .card-thumb img{transform:scale(1.03)}
+
+/* 紧凑列表 */
+.tight-list{list-style:none;padding:0;margin:0;font-size:14.5px}
+.tight-list li{
+  display:flex;gap:var(--sp-3);align-items:baseline;padding:10px 2px;border-bottom:1px dashed var(--c-line);
+  margin:0;
+}
+.tight-list li:last-child{border-bottom:0}
+.tight-list time{font-family:var(--ff-s);font-size:12px;color:var(--c-ink-2);flex-shrink:0;width:70px}
+.tight-list .tl-title{color:var(--c-ink)}
+.tight-list .tl-note{font-size:12.5px;color:var(--c-ink-2);margin-left:auto;text-align:right;flex-shrink:0}
+
+/* 频道索引 */
+.channels{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2)}
+.channels a{
+  display:block;padding:10px 12px;background:var(--c-paper);border:1px solid var(--c-line);
+  border-radius:var(--r-s);font-family:var(--ff-s);font-size:13.5px;color:var(--c-ink);
+  transition:background .16s ease,transform .16s ease;text-align:center;
+}
+.channels a:hover{background:var(--c-soft);transform:translateY(-2px);text-decoration:none}
+.channels a small{display:block;font-size:11px;color:var(--c-ink-2);margin-top:2px}
+
+/* 深度解析 */
+.deep{background:var(--c-paper);border:1px solid var(--c-line);border-radius:var(--r-l);padding:var(--sp-5);box-shadow:var(--sh-1)}
+.deep h3{font-size:18px;margin:var(--sp-5) 0 var(--sp-3);padding-left:12px;border-left:4px solid var(--c-main)}
+.deep h3:first-of-type{margin-top:var(--sp-3)}
+.deep p{font-size:15px;color:#3c3a4c}
+.quote{
+  margin:var(--sp-4) 0;padding:var(--sp-4) var(--sp-5);background:var(--c-soft-2);
+  border-left:3px solid var(--c-main);border-radius:0 var(--r-s) var(--r-s) 0;font-size:14.5px;color:#4a3a35;
+}
+.quote cite{display:block;font-style:normal;font-family:var(--ff-s);font-size:12px;color:var(--c-ink-2);margin-top:var(--sp-2)}
+table.check{width:100%;border-collapse:collapse;font-family:var(--ff-s);font-size:13px;margin:var(--sp-3) 0 var(--sp-5)}
+table.check th,table.check td{border:1px solid var(--c-line);padding:8px 10px;text-align:left;vertical-align:top}
+table.check th{background:var(--c-soft);color:var(--c-main-d);font-weight:600}
+table.check td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 步骤 */
+.steps{list-style:none;padding:0;counter-reset:s;display:grid;gap:var(--sp-3)}
+.steps li{
+  counter-increment:s;position:relative;padding:var(--sp-3) var(--sp-4) var(--sp-3) 56px;
+  background:var(--c-paper);border:1px solid var(--c-line);border-radius:var(--r-m);margin:0;
+  font-size:14.5px;
+}
+.steps li::before{
+  content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;
+  background:var(--c-main);color:#fff;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--ff-s);font-size:13px;font-weight:700;
+}
+.steps b{display:block;font-size:15px;margin-bottom:2px}
+
+/* 对照面板 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--c-line);border-radius:var(--r-m);overflow:hidden}
+.compare>div{padding:var(--sp-4)}
+.compare .left{background:var(--c-paper)}
+.compare .right{background:var(--c-soft-2);border-left:1px solid var(--c-line)}
+.compare h4{font-family:var(--ff-s);font-size:13px;letter-spacing:.06em;margin-bottom:var(--sp-2);color:var(--c-main-d)}
+.compare ul{font-size:13.5px;margin:0}
+
+/* FAQ */
+details.faq{
+  background:var(--c-paper);border:1px solid var(--c-line);border-radius:var(--r-m);
+  padding:0;margin-bottom:var(--sp-3);overflow:hidden;
+}
+details.faq summary{
+  cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:600;
+  display:flex;justify-content:space-between;gap:var(--sp-3);align-items:center;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"＋";font-family:var(--ff-s);color:var(--c-main);font-weight:400;flex-shrink:0}
+details.faq[open] summary::after{content:"－"}
+details.faq .faq-body{padding:0 18px 16px;font-size:14.5px;color:var(--c-ink-2)}
+details.faq .faq-body p{margin:0}
+
+/* 评论 */
+.comments{display:grid;gap:var(--sp-3)}
+.comment{
+  background:var(--c-paper);border:1px solid var(--c-line);border-radius:var(--r-m);
+  padding:var(--sp-3) var(--sp-4);
+}
+.comment .who{display:flex;gap:var(--sp-2);align-items:baseline;font-family:var(--ff-s);font-size:13px;margin-bottom:4px}
+.comment .who b{color:var(--c-ink)}
+.comment .who time{font-size:11.5px;color:var(--c-ink-2)}
+.comment .who .score{margin-left:auto;font-size:12px;color:var(--c-warn)}
+.comment p{font-size:14px;margin:0;color:#3f3d50}
+.comment .ref{font-size:12px;color:var(--c-main-d);font-family:var(--ff-s)}
+
+/* 标签 */
+.tags{display:flex;flex-wrap:wrap;gap:var(--sp-2);list-style:none;padding:0;margin:0}
+.tags a{
+  display:inline-block;font-family:var(--ff-s);font-size:13px;padding:6px 13px;
+  background:var(--c-paper);border:1px solid var(--c-line);border-radius:999px;color:var(--c-ink-2);
+}
+.tags a:hover{background:var(--c-soft);color:var(--c-main-d);text-decoration:none}
+
+/* 榜单 */
+.rank{list-style:none;padding:0;margin:0;counter-reset:r}
+.rank li{
+  counter-increment:r;display:grid;grid-template-columns:34px 1fr auto;gap:var(--sp-3);
+  align-items:center;padding:11px 12px;background:var(--c-paper);border:1px solid var(--c-line);
+  border-radius:var(--r-s);margin-bottom:var(--sp-2);font-size:14px;
+}
+.rank li::before{
+  content:counter(r);font-family:var(--ff-s);font-weight:700;color:var(--c-main-d);text-align:center;
+}
+.rank .val{font-family:var(--ff-s);font-size:12.5px;color:var(--c-ink-2)}
+
+/* 时间线 */
+.timeline{list-style:none;padding:0 0 0 18px;margin:0;border-left:2px solid var(--c-soft)}
+.timeline li{position:relative;padding:0 0 var(--sp-4) var(--sp-3);margin:0;font-size:14px}
+.timeline li::before{
+  content:"";position:absolute;left:-25px;top:8px;width:10px;height:10px;border-radius:50%;
+  background:var(--c-main);border:2px solid var(--c-bg);
+}
+.timeline time{font-family:var(--ff-s);font-size:12px;color:var(--c-main-d);display:block;margin-bottom:2px}
+
+/* 引语卡 */
+.pull-quote{
+  background:var(--c-ink);color:#f4ede8;border-radius:var(--r-l);padding:var(--sp-5);
+  font-size:17px;line-height:1.75;
+}
+.pull-quote cite{display:block;font-style:normal;font-family:var(--ff-s);font-size:12.5px;color:#c9c3d1;margin-top:var(--sp-3)}
+
+/* 侧栏 */
+.side-card{
+  background:var(--c-paper);border:1px solid var(--c-line);border-radius:var(--r-m);
+  padding:var(--sp-4);margin-bottom:var(--sp-4);font-size:14px;
+}
+.side-card h3{font-family:var(--ff-s);font-size:13px;letter-spacing:.08em;color:var(--c-ink-2);margin-bottom:var(--sp-3)}
+.side-nav{list-style:none;padding:0;margin:0;font-family:var(--ff-s);font-size:13.5px}
+.side-nav a{
+  display:block;padding:6px 10px;border-radius:var(--r-s);color:var(--c-ink-2);text-decoration:none;
+  border-left:2px solid transparent;
+}
+.side-nav a:hover{background:var(--c-soft);color:var(--c-main-d)}
+.side-nav a.active{background:var(--c-soft);color:var(--c-main-d);border-left-color:var(--c-main);font-weight:600}
+.side-note{font-size:12.5px;color:var(--c-ink-2);line-height:1.7}
+.side-note b{color:var(--c-ink)}
+
+/* 页尾 */
+footer{background:var(--c-ink);color:#d8d2e0;padding:var(--sp-7) var(--sp-5) var(--sp-5);font-family:var(--ff-s);font-size:13px}
+.footer-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--sp-5)}
+.footer-brand .brand-text{color:#fff}
+.footer-brand p{color:#a9a3b8;font-size:12.5px;margin-top:var(--sp-3);line-height:1.7}
+.footer-col h4{font-size:12px;letter-spacing:.1em;color:#f4b6a8;margin-bottom:var(--sp-3)}
+.footer-col ul{list-style:none;padding:0;margin:0;font-size:12.5px}
+.footer-col li{margin-bottom:7px}
+.footer-col a{color:#c2bccd;text-decoration:none}
+.footer-col a:hover{color:#fff;text-decoration:underline}
+.footer-bottom{
+  max-width:1180px;margin:var(--sp-5) auto 0;padding-top:var(--sp-4);border-top:1px solid #45425c;
+  display:flex;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;font-size:12px;color:#9a94ac;
+}
+
+/* 回到顶部 */
+#toTop{
+  position:fixed;right:18px;bottom:22px;z-index:70;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--c-line);background:var(--c-paper);color:var(--c-main-d);
+  font-family:var(--ff-s);font-size:12px;cursor:pointer;box-shadow:var(--sh-2);
+  opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;
+}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{transform:translateY(-3px)}
+
+/* 响应式 */
+@media (max-width:1000px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;order:2}
+  .main-col{order:1}
+  .hero{grid-template-columns:1fr;gap:var(--sp-5)}
+  .hero-art{max-width:420px;margin:0 auto;width:100%}
+  .channels{grid-template-columns:repeat(3,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .header-inner{padding:8px 14px;gap:8px}
+  .menu-btn{display:inline-block}
+  .nav{
+    display:none;order:5;width:100%;flex-direction:column;gap:0;background:var(--c-paper);
+    border:1px solid var(--c-line);border-radius:var(--r-m);padding:6px;margin-top:4px;
+  }
+  .nav.open{display:flex}
+  .nav a{padding:9px 10px;border-radius:var(--r-s)}
+  .header-tools{margin-left:auto}
+  .search input{width:88px}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr}
+  .channels{grid-template-columns:repeat(2,1fr)}
+  .compare{grid-template-columns:1fr}
+  .compare .right{border-left:0;border-top:1px solid var(--c-line)}
+  .section{scroll-margin-top:calc(var(--announce-h) + 110px)}
+  .hero{padding:var(--sp-6) 14px var(--sp-5)}
+  .layout{padding:0 14px var(--sp-7)}
+  .announce{font-size:12px;padding:0 10px}
+  .rank li{grid-template-columns:28px 1fr;row-gap:2px}
+  .rank .val{grid-column:2}
+  .tight-list li{flex-wrap:wrap}
+  .tight-list .tl-note{margin-left:0;width:100%;text-align:left}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:var(--sp-4)}
+}
+@media (max-width:480px){
+  .grid-3{grid-template-columns:1fr}
+  .hero-stats{gap:var(--sp-4)}
+  .footer-inner{grid-template-columns:1fr}
+  .deep{padding:var(--sp-4)}
+  .search input{width:70px}
+  #toTop{right:12px;bottom:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .card:hover,.btn:hover,#toTop:hover,.channels a:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-wrap">
+  <div class="announce" role="note" aria-label="站点更新公告">
+    <span><b>王雨纯mm131</b> 图集编号归档已补至 <b>No.214</b>，11月6日新增套图 3 组，共 186 张。</span>
+  </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/#top" aria-label="返回首页顶部">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <rect width="64" height="64" rx="14" fill="#2b2a3d"/>
+          <circle cx="32" cy="25" r="10" fill="#f4b6a8"/>
+          <path d="M14 56c2-12 9-18 18-18s16 6 18 18z" fill="#f4b6a8"/>
+          <path d="M22 12h20v3H22z" fill="#b5544a"/>
+          <circle cx="28" cy="24" r="1.6" fill="#2b2a3d"/>
+          <circle cx="36" cy="24" r="1.6" fill="#2b2a3d"/>
+        </svg>
+        <span class="brand-text">王雨纯mm131<span class="brand-sub">图集编号归档</span></span>
+      </a>
+      <nav class="nav" id="mainNav" aria-label="主题导航">
+        <a href="/#overview">领域概览</a>
+        <a href="/#picks">精选图集</a>
+        <a href="/#updates">更新记录</a>
+        <a href="/#channels">分类入口</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#comments">读者评论</a>
+      </nav>
+      <div class="header-tools">
+        <div class="search" role="search">
+          <label for="siteSearch" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">搜索图集编号或主题</label>
+          <input id="siteSearch" type="search" placeholder="编号 / 主题 / 场景" autocomplete="off">
+          <button type="button" id="searchBtn">查找</button>
+        </div>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">菜单</button>
+      </div>
+    </div>
+    <div class="search-feedback"><p id="searchNote" role="status" aria-live="polite"></p></div>
+  </header>
+</div>
+
+<a id="top"></a>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <p class="hero-kicker">写真图集 · 编号整理 · 版本差异</p>
+      <h1 id="hero-title">王雨纯mm131</h1>
+      <p class="hero-desc">把一个常在讨论区被反复提到的系列，拆成可查的编号、日期、张数与拍摄主题。查套图先看编号规则，再看当天更新，比翻相册更省事。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/#updates">看本周更新</a>
+        <a class="btn btn-ghost" href="/#channels">按主题找图集</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>214</b><span>已归档编号</span></div>
+        <div><b>3,860</b><span>套图累计张数</span></div>
+        <div><b>17</b><span>拍摄主题分类</span></div>
+        <div><b>2026.11.06</b><span>最近一次补录</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 440" role="img" aria-label="抽象图集卡片堆叠示意">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f6e6de"/>
+            <stop offset="1" stop-color="#fdf1ea"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2b2a3d"/>
+            <stop offset="1" stop-color="#45425c"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="400" height="440" rx="24" fill="url(#g1)"/>
+        <rect x="58" y="70" width="230" height="300" rx="16" fill="#fff" stroke="#e7dcd4" transform="rotate(-7 173 220)"/>
+        <rect x="86" y="60" width="230" height="300" rx="16" fill="#fff" stroke="#e7dcd4" transform="rotate(4 201 210)"/>
+        <rect x="108" y="86" width="186" height="120" rx="10" fill="#e7dcd4"/>
+        <circle cx="150" cy="126" r="20" fill="#f4b6a8"/>
+        <path d="M118 190c8-26 22-38 44-38s36 12 44 38z" fill="#f4b6a8"/>
+        <rect x="108" y="222" width="120" height="10" rx="5" fill="#2b2a3d" opacity=".78"/>
+        <rect x="108" y="242" width="150" height="8" rx="4" fill="#565468" opacity=".5"/>
+        <rect x="108" y="260" width="98" height="8" rx="4" fill="#565468" opacity=".5"/>
+        <rect x="108" y="288" width="62" height="22" rx="11" fill="#b5544a" opacity=".9"/>
+        <rect x="180" y="288" width="62" height="22" rx="11" fill="#f6e6de"/>
+        <circle cx="316" cy="352" r="52" fill="url(#g2)"/>
+        <text x="316" y="348" text-anchor="middle" fill="#f4b6a8" font-family="Georgia,serif" font-size="17" font-weight="700">No.214</text>
+        <text x="316" y="370" text-anchor="middle" fill="#c9c3d1" font-family="sans-serif" font-size="10" letter-spacing="1">ARCHIVE</text>
+        <rect x="34" y="356" width="118" height="34" rx="17" fill="#fff" stroke="#e7dcd4"/>
+        <text x="93" y="378" text-anchor="middle" fill="#8e3b33" font-family="sans-serif" font-size="12">186 张 · 11.06</text>
+      </svg>
+    </div>
+  </section>
+
+  <div class="layout">
+    <div class="main-col">
+
+      <!-- 领域概览 -->
+      <section class="section" id="overview" aria-labelledby="h-overview">
+        <div class="sec-head"><h2 id="h-overview">领域概览</h2><span class="sec-tag">01 / 结构</span></div>
+        <p class="lead">所谓“mm131”，在讨论区里通常指代一套按编号连载的写真图集体系。编号是骨架，每期以“No. ×××”标注；同一编号下可能包含多套服装与场景，张数从 20 到 90 不等。读者找图的顺序，一般是先定编号，再定主题。</p>
+        <div class="grid-3">
+          <div class="card"><div class="card-body">
+            <span class="pill">编号体系</span>
+            <h3>No. 三位数连载规则</h3>
+            <p>编号自 No.001 起递增，三位数补零。遇合辑会拆分为 No.128-1、No.128-2，归档时合并计数但保留分册号。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <span class="pill pill-green">套图结构</span>
+            <h3>单期平均 18 张</h3>
+            <p>2026 年归档的 40 期中，套图张数均值 18.4，中位数 16，最长一组 No.196 达 41 张，含更衣与户外两段场景。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <span class="pill pill-warn">版本差异</span>
+            <h3>同名套图的两版区别</h3>
+            <p>No.172 在 9 月与 10 月各出现一次，旧版 14 张、新版 22 张，新补 8 张为同一场景的连拍，画面顺序重排。</p>
+          </div></div>
+        </div>
+        <h3 class="sub-h3">判断一个编号是否值得追，先看三处</h3>
+        <ul class="tight-list">
+          <li><time>场景</time><span class="tl-title">室内棚拍与城市外景的占比</span><span class="tl-note">比例接近 7:3 的期次讨论度更高</span></li>
+          <li><time>张数</time><span class="tl-title">张数超过 30 的期次通常分两个文件夹</span><span class="tl-note">单文件夹超过 30 张易缺页</span></li>
+          <li><time>复核</time><span class="tl-title">发布后一周内有没有补图说明</span><span class="tl-note">No.203 补图 6 张，见更新记录</span></li>
+        </ul>
+      </section>
+
+      <!-- 精选内容推荐 -->
+      <section class="section" id="picks" aria-labelledby="h-picks">
+        <div class="sec-head"><h2 id="h-picks">精选图集推荐</h2><span class="sec-tag">02 / 编辑选择</span></div>
+        <div class="grid-2">
+          <article class="card">
+            <div class="card-thumb"><img src="https://picsum.photos/seed/mm131picksa/520/300" width="520" height="300" loading="lazy" alt="窗边逆光下的室内棚拍场景，浅色窗帘与木地板"></div>
+            <div class="card-body">
+              <span class="pill">室内棚拍</span>
+              <h3>No.208 窗边逆光套图</h3>
+              <p>30 张，全部自然光，拍摄于 10 月 24 日下午三点到五点。相同机位连拍占比高，适合对照光线变化。</p>
+              <div class="meta"><span>10-24 发布</span><span>评论 46</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-thumb"><img src="https://picsum.photos/seed/mm131picksb/520/300" width="520" height="300" loading="lazy" alt="老街砖墙前的街拍构图，午后斜影"></div>
+            <div class="card-body">
+              <span class="pill pill-green">城市外景</span>
+              <h3>No.205 老街砖墙街拍</h3>
+              <p>24 张，取景在某段骑楼街区。编号说明里标注了“午后侧光”，第 9 到 15 张影线最清晰。</p>
+              <div class="meta"><span>10-18 发布</span><span>评论 31</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-thumb"><img src="https://picsum.photos/seed/mm131picksc/520/300" width="520" height="300" loading="lazy" alt="浅灰背景的棚拍半身构图，服装色块对比明显"></div>
+            <div class="card-body">
+              <span class="pill">棚拍纯色背景</span>
+              <h3>No.199 浅灰背景系列</h3>
+              <p>18 张，背景统一为浅灰。编号页标注了布光位置，两盏柔光箱呈 45 度夹角，这类标注在早期期次里很少见。</p>
+              <div class="meta"><span>10-02 发布</span><span>评论 22</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-thumb"><img src="https://picsum.photos/seed/mm131picksd/520/300" width="520" height="300" loading="lazy" alt="海边防波堤上的远距离构图，天空占比大"></div>
+            <div class="card-body">
+              <span class="pill pill-warn">外景远景</span>
+              <h3>No.191 防波堤远景组</h3>
+              <p>26 张，远景与中景交替。第 1 至 6 张为广角，之后收窄到 50mm 视角，编号说明里给出了镜头段落。</p>
+              <div class="meta"><span>09-15 发布</span><span>评论 18</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 最新更新 -->
+      <section class="section" id="updates" aria-labelledby="h-updates">
+        <div class="sec-head"><h2 id="h-updates">最新更新记录</h2><span class="sec-tag">03 / 30 天内</span></div>
+        <ul class="tight-list">
+          <li><time>11-06</time><span class="tl-title">No.214 新增套图 3 组，共 186 张</span><span class="tl-note">含两段室内、一段天台</span></li>
+          <li><time>11-04</time><span class="tl-title">No.213 修订说明上线，张数由 19 改为 21</span><span class="tl-note">补图 2 张</span></li>
+          <li><time>11-01</time><span class="tl-title">No.212 更换封面，理由为原封面与内页顺序不符</span><span class="tl-note">仅封面变动</span></li>
+          <li><time>10-28</time><span class="tl-title">No.209 补录一组夜景外景，新增 9 张</span><span class="tl-note">编号未拆分</span></li>
+          <li><time>10-24</time><span class="tl-title">No.208 发布，30 张，窗边逆光</span><span class="tl-note">无补图</span></li>
+          <li><time>10-22</time><span class="tl-title">No.207 目录结构改为按场景分组</span><span class="tl-note">张数不变</span></li>
+          <li><time>10-18</time><span class="tl-title">No.205 发布，24 张，老街砖墙</span><span class="tl-note">见深度解析第 2 节</span></li>
+          <li><time>10-12</time><span class="tl-title">No.203 补图 6 张，回应“缺页”反馈</span><span class="tl-note">原 17 张变 23 张</span></li>
+          <li><time>10-09</time><span class="tl-title">合辑 No.128-2 重新打包，文件名统一</span><span class="tl-note">内容未变</span></li>
+        </ul>
+      </section>
+
+      <!-- 分类入口 -->
+      <section class="section" id="channels" aria-labelledby="h-channels">
+        <div class="sec-head"><h2 id="h-channels">分类入口</h2><span class="sec-tag">04 / 频道</span></div>
+        <p class="lead">按拍摄场景与造型方向归类，共 9 个频道。频道内条目按编号倒序排列，同一编号只归入主场景一次。</p>
+        <div class="channels">
+          <a href="/#picks">室内棚拍<small>74 期</small></a>
+          <a href="/#picks">城市外景<small>39 期</small></a>
+          <a href="/#picks">自然光逆光<small>28 期</small></a>
+          <a href="/#picks">海边与防波堤<small>21 期</small></a>
+          <a href="/#picks">天台与高楼<small>16 期</small></a>
+          <a href="/#picks">纯色背景<small>13 期</small></a>
+          <a href="/#picks">夜景街拍<small>11 期</small></a>
+          <a href="/#picks">连拍花絮<small>8 期</small></a>
+          <a href="/#picks">合辑分册<small>4 组</small></a>
+        </div>
+        <h3 class="sub-h3">编号索引：按百位快速定位</h3>
+        <div class="compare">
+          <div class="left">
+            <h4>No.100 以下</h4>
+            <ul>
+              <li>No.001—No.060：早期棚拍为主，布光标注少</li>
+              <li>No.061—No.099：开始出现外景，单期张数普遍低于 15</li>
+              <li>常见问题：文件名无统一前缀</li>
+            </ul>
+          </div>
+          <div class="right">
+            <h4>No.100 及以上</h4>
+            <ul>
+              <li>No.100—No.170：目录按场景拆分，张数增至 20 上下</li>
+              <li>No.171—No.214：增加修订说明与补图记录</li>
+              <li>常见问题：合辑分册号与主编号混用</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 深度解析 -->
+      <section class="section" id="deep" aria-labelledby="h-deep">
+        <div class="sec-head"><h2 id="h-deep">深度解析：编号比张数更能说明问题</h2><span class="sec-tag">05 / 主体阅读</span></div>
+        <div class="deep">
+          <p>把一个系列当作“图集”而不是“相册”，差别在于是否承认编号的约束力。编号一旦定下，同一期次内部的张数、场景、发布顺序都要围绕它对齐；反过来，张数只是编号的附属说明。判断一个期次可信度，先看编号页与文件目录是否一致，再看张数是不是被后来的补图改过。</p>
+
+          <h3>一、No.172 两次出现的差异，能反推出归档口径</h3>
+          <p>No.172 在 9 月 21 日与 10 月 3 日各出现一次。9 月版本 14 张，目录名为“172_a”，10 月版本 22 张，目录名为“172_b”。两版前 14 张画面一致，但第 3、4 张顺序互换；新增的 8 张全部是同一窗边机位的连拍，拍摄时间戳落在 9 月 21 日 15:40 到 15:52。</p>
+          <p>由此可以提出一个可反驳的判断：补图不是重拍，而是把同一时段未选入的连拍补回。如果这个判断成立，那么 No.172 的“真实张数”应当是 22 张，9 月版本的 14 张属于初选截断。反例是：若能在 9 月 21 日当天的讨论记录里找到“只发 14 张”的原始说明，则更可能是分批发布而非截断。</p>
+          <blockquote class="quote">“172 那组我下过两版，第 3 张和第 4 张位置不一样，其他没动。后面补的 8 张光线跟前面完全连得上。”<cite>—— 读者「暗房灯」在 10 月 5 日的留言</cite></blockquote>
+
+          <h3>二、把“值不值得追”拆成可核对的四项</h3>
+          <p>以 No.205 与 No.208 为例，两者都在 10 月发布，张数接近，但结构与标注完整度差别明显。下表把判断拆成四项可核对指标，每项都能回到编号页原文或文件目录核对。</p>
+          <table class="check">
+            <thead><tr><th>核对项</th><th>No.205 老街砖墙</th><th>No.208 窗边逆光</th></tr></thead>
+            <tbody>
+              <tr><td>发布日</td><td class="num">10-18</td><td class="num">10-24</td></tr>
+              <tr><td>张数（初版 / 现版）</td><td class="num">24 / 24</td><td class="num">30 / 30</td></tr>
+              <tr><td>编号页标注</td><td>场景、时段、侧光方向</td><td>场景、时段、布光位置</td></tr>
+              <tr><td>目录与编号页一致性</td><td>一致</td><td>一致，但第 12 张文件名缺序号</td></tr>
+            </tbody>
+          </table>
+          <p>四项里只有第 4 项出现瑕疵时，No.208 的归档完整度仍高于 No.205，因为它的标注可直接用于复现拍摄条件。这里的分歧点在于：标注是否算“内容”。若只按画面看，两者差别不大；若按可检索性看，标注完整的期次更容易被后续引用。</p>
+
+          <h3>三、No.203 的补图回应，说明反馈能改变归档</h3>
+          <p>No.203 在 10 月 5 日发布，初版 17 张。10 月 7 日有读者指出第 13 到 15 张之间存在跳帧，理由是三张画面里手部位置不连续。10 月 12 日编号页更新，补图 6 张，张数变为 23，并附一行说明：“按原拍摄顺序补回中间帧。”</p>
+          <p>这条例子的关键在于：补图依据是拍摄顺序，而非讨论热度。换句话说，只要能证明中间帧存在，补图就成立；不能证明时，补图只是猜测。这条标准也可以反向用于质疑其他期次——如果某期补图没有给出顺序依据，就不该默认它补得对。</p>
+
+          <h3>四、可以引用的三条判断</h3>
+          <ol>
+            <li>编号决定期次边界，张数只是边界内的计数；同一编号多版本时，以目录完整的一版为准。</li>
+            <li>补图的合法性看是否给出拍摄顺序依据，而不看补了多少张；No.203 属前者，No.209 的夜景补录未见顺序说明，属待核。</li>
+            <li>标注完整的期次在检索上更有价值，这一点与画面质量无关，是两个维度。</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 体验指南 -->
+      <section class="section" id="guide" aria-labelledby="h-guide">
+        <div class="sec-head"><h2 id="h-guide">体验指南：从编号到套图的五步</h2><span class="sec-tag">06 / 操作</span></div>
+        <ol class="steps">
+          <li><b>先定编号</b>在编号索引里按百位区间找，No.171 之后新增修订说明，优先看这一段近两个月的期次。</li>
+          <li><b>再看张数</b>张数超过 30 的期次通常分两段场景，先看目录分段，避免只读到前半段。</li>
+          <li><b>核对标注</b>编号页若写明时段与光线方向，可用来判断同一场景内哪些张是连拍，便于按顺序读。</li>
+          <li><b>查修订</b>发布一周内出现过补图或封面调整的期次，在更新记录里能查到对应条目，以现版张数为准。</li>
+          <li><b>记下差异</b>同一编号出现多版时，记下目录名后缀（_a / _b），后续对照不再混淆。</li>
+        </ol>
+        <h3 class="sub-h3">三类读者，读法不一样</h3>
+        <div class="grid-3">
+          <div class="card"><div class="card-body">
+            <h3>按场景收集</h3>
+            <p>先看频道，室内棚拍 74 期是最大一类。适合从 No.199 浅灰背景系列入手，背景统一，便于横向比较。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <h3>按编号追更</h3>
+            <p>直接盯更新记录，11 月 6 日 No.214 发布 186 张，是近 30 天内张数最多的一次更新。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <h3>做版本对照</h3>
+            <p>只关心同一编号的多版差异，重点看 No.172 与 No.203，两例都留有可核对的补图说明。</p>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq" aria-labelledby="h-faq">
+        <div class="sec-head"><h2 id="h-faq">常见问答</h2><span class="sec-tag">07 / 折叠</span></div>
+        <details class="faq" open>
+          <summary>No.172 为什么有两个版本？</summary>
+          <div class="faq-body"><p>No.172 在 9 月 21 日与 10 月 3 日各出现一次，9 月版 14 张、10 月版 22 张，目录名分别为 172_a 与 172_b。两版前 14 张画面一致，新增 8 张为同一窗边机位的连拍。</p></div>
+        </details>
+        <details class="faq">
+          <summary>张数多的期次一定内容更全吗？</summary>
+          <div class="faq-body"><p>不一定。张数只说明计数，内容是否完整要看目录与编号页是否一致。No.208 有 30 张，但第 12 张文件名缺序号；No.205 只有 24 张，目录一致性却是完整的。</p></div>
+        </details>
+        <details class="faq">
+          <summary>补图之后以哪一版为准？</summary>
+          <div class="faq-body"><p>以现版为准。No.203 在 10 月 12 日补图 6 张，由 17 张变为 23 张，编号页附了“按原拍摄顺序补回中间帧”的说明，张数与顺序都以补后版本为基准。</p></div>
+        </details>
+        <details class="faq">
+          <summary>合辑分册号怎么和主编号对应？</summary>
+          <div class="faq-body"><p>分册以主编号加连字符表示，如 No.128-1、No.128-2。归档时合计张数，但分册各自保留独立目录，不合并成单一文件夹。</p></div>
+        </details>
+        <details class="faq">
+          <summary>编号页的布光标注有什么用？</summary>
+          <div class="faq-body"><p>用来复现拍摄条件。No.199 标注两盏柔光箱呈 45 度夹角，No.208 标注窗边自然光时段，这类信息在按场景检索时能作为区分依据，而不是装饰。</p></div>
+        </details>
+      </section>
+
+      <!-- 用户评论 -->
+      <section class="section" id="comments" aria-labelledby="h-comments">
+        <div class="sec-head"><h2 id="h-comments">读者评论</h2><span class="sec-tag">08 / 互动</span></div>
+        <div class="comments">
+          <div class="comment">
+            <div class="who"><b>暗房灯</b><time>11-06 21:12</time><span class="score">★★★★☆</span></div>
+            <p>No.214 一次给 186 张，分段思路很清楚，室内两段加天台一段，不像有的期次堆在一起。天台那段的影线比室内好认。<span class="ref">（指向 No.214）</span></p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>老式快门</b><time>11-05 10:03</time><span class="score">★★★☆☆</span></div>
+            <p>No.212 换封面这件事处理得拖，说明只写“原封面与内页顺序不符”，没给旧封面编号，想核对也找不到参照物。<span class="ref">（指向 No.212 封面修订）</span></p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>骑楼下的猫</b><time>11-03 16:47</time><span class="score">★★★★★</span></div>
+            <p>No.205 的老街砖墙我是从频道入口翻到的，编号页写了午后侧光，第 9 到 15 张影线确实最清楚，这个标注帮了大忙。<span class="ref">（指向 No.205）</span></p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>连拍三段</b><time>11-01 09:26</time><span class="score">★★★☆☆</span></div>
+            <p>No.172 两版对照过，第 3、4 张顺序互换这点我同意，但说“补图是初选截断”还有点早，9 月那天的讨论记录没人翻出来。<span class="ref">（指向深度解析第一节）</span></p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>棚拍计时器</b><time>10-29 22:15</time><span class="score">★★★★☆</span></div>
+            <p>No.199 的 45 度布光标得细，浅灰背景也统一，适合一组一组对着看。不过 18 张偏少，后半段收得有点急。</p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>防波堤风大</b><time>10-26 13:40</time><span class="score">★★★★☆</span></div>
+            <p>No.191 前 6 张广角后收窄到 50mm，编号说明给了镜头段落，这种写法希望多来点。远景那几张天空占比大，构图能看出取舍。<span class="ref">（指向 No.191）</span></p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>夜路慢门</b><time>10-23 19:08</time><span class="score">★★☆☆☆</span></div>
+            <p>No.209 的夜景补录没写顺序依据，只说新增 9 张，和 No.203 那种补法差太多，暂时按待核处理。<span class="ref">（指向 No.209）</span></p>
+          </div>
+          <div class="comment">
+            <div class="who"><b>目录强迫症</b><time>10-20 08:55</time><span class="score">★★★★☆</span></div>
+            <p>No.207 按场景分组改得可以，找图不用来回翻了。就是分组的命名不统一，有的用时间有的用服装。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 相关资讯 -->
+      <section class="section" id="news" aria-labelledby="h-news">
+        <div class="sec-head"><h2 id="h-news">相关资讯</h2><span class="sec-tag">09 / 简讯</span></div>
+        <ul class="tight-list">
+          <li><time>11-07</time><span class="tl-title">编号索引页新增“待核补图”标记，No.209 被列入</span></li>
+          <li><time>11-02</time><span class="tl-title">No.214 天台场景的拍摄时段记为 16:20 至 17:05</span></li>
+          <li><time>10-30</time><span class="tl-title">合辑 No.128-2 重新打包完成，文件名统一为 128_2_xx</span></li>
+          <li><time>10-21</time><span class="tl-title">No.207 目录结构调整后，场景分组由两种命名并为一种</span></li>
+        </ul>
+      </section>
+
+      <!-- 相关推荐 -->
+      <section class="section" id="related" aria-labelledby="h-related">
+        <div class="sec-head"><h2 id="h-related">相关推荐标签</h2><span class="sec-tag">10 / 索引</span></div>
+        <ul class="tags">
+          <li><a href="/#picks">窗边逆光套图</a></li>
+          <li><a href="/#picks">老街砖墙街拍</a></li>
+          <li><a href="/#picks">浅灰背景系列</a></li>
+          <li><a href="/#picks">防波堤远景组</a></li>
+          <li><a href="/#deep">No.172 两版对照</a></li>
+          <li><a href="/#deep">补图顺序依据</a></li>
+          <li><a href="/#channels">合辑分册号</a></li>
+          <li><a href="/#updates">No.203 补图记录</a></li>
+        </ul>
+      </section>
+
+      <!-- 补充板块：可信度分层 + 时间线 -->
+      <section class="section" id="trust" aria-labelledby="h-trust">
+        <div class="sec-head"><h2 id="h-trust">归档可信度分层与 10 月时间线</h2><span class="sec-tag">11 / 补充</span></div>
+        <div class="grid-2">
+          <div class="card"><div class="card-body">
+            <h3>第一层：编号页与目录一致</h3>
+            <p>No.205、No.208、No.199 属此类。张数、场景、时段三项都能在编号页找到对应文字，且目录文件名连续。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <h3>第二层：有补图但依据清楚</h3>
+            <p>No.203 属此类。补图 6 张并附“按原拍摄顺序补回中间帧”，可以按说明核对。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <h3>第三层：有修订但说明含糊</h3>
+            <p>No.212 换封面只写理由，未给旧封面参照；No.209 夜景补录未写顺序依据，两者都列为待核。</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <h3>第四层：多版本未合并</h3>
+            <p>No.172 两版并存，_a 与 _b 都在，尚未给出合并结论。读时按现版 22 张为准。</p>
+          </div></div>
+        </div>
+        <h3 class="sub-h3">10 月至 11 月的时间线</h3>
+        <ul class="timeline">
+          <li><time>10-02</time>No.199 浅灰背景系列发布，18 张</li>
+          <li><time>10-12</time>No.203 补图 6 张，张数变为 23</li>
+          <li><time>10-18</time>No.205 老街砖墙发布，24 张</li>
+          <li><time>10-24</time>No.208 窗边逆光发布，30 张</li>
+          <li><time>10-28</time>No.209 夜景外景补录 9 张</li>
+          <li><time>11-04</time>No.213 修订说明上线，张数由 19 改为 21</li>
+          <li><time>11-06</time>No.214 发布，3 组共 186 张</li>
+        </ul>
+        <div class="pull-quote">
+          编号定边界，说明定可信度。前者错一次，后面全跟着错；后者缺一项，读的人只能猜。
+          <cite>—— 由 No.172 与 No.203 两例归纳</cite>
+        </div>
+      </section>
+
+    </div><!-- /main-col -->
+
+    <aside aria-label="侧栏导航与补充信息">
+      <div class="side-card">
+        <h3>栏目导航</h3>
+        <ul class="side-nav" id="sideNav">
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#picks">精选图集推荐</a></li>
+          <li><a href="/#updates">最新更新记录</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#comments">读者评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#related">相关推荐标签</a></li>
+          <li><a href="/#trust">可信度分层</a></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>近期更新速览</h3>
+        <p class="side-note"><b>11-06</b>　No.214 发布 186 张<br><b>11-04</b>　No.213 张数改为 21<br><b>11-01</b>　No.212 更换封面<br><b>10-28</b>　No.209 补录夜景 9 张</p>
+      </div>
+      <div class="side-card">
+        <h3>编号口径提示</h3>
+        <p class="side-note">合辑分册以连字符区分；同一编号出现多版时，目录名后缀 _a、_b 表示先后版本。补图未给顺序依据的期次，归入待核。</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-text">王雨纯mm131</span>
+      <p>按编号整理写真图集，记录张数、场景与修订轨迹，方便逐期对照与检索。</p>
+    </div>
+    <div class="footer-col">
+      <h4>内容栏目</h4>
+      <ul>
+        <li><a href="/#overview">领域概览</a></li>
+        <li><a href="/#picks">精选图集推荐</a></li>
+        <li><a href="/#updates">最新更新记录</a></li>
+        <li><a href="/#deep">深度解析</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>检索入口</h4>
+      <ul>
+        <li><a href="/#channels">分类入口</a></li>
+        <li><a href="/#guide">体验指南</a></li>
+        <li><a href="/#faq">常见问答</a></li>
+        <li><a href="/#related">相关推荐标签</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>说明</h4>
+      <ul>
+        <li>条目与日期为示例数据</li>
+        <li>张数、编号、场景均按示例生成</li>
+        <li>正文更新于 2026-11-07</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 图集编号归档示例站。内容为示例数据，仅作结构演示。</span>
+    <span>更新时间 2026-11-07，对应 No.214 与 No.213 两条可核对更新。</span>
+  </div>
+</footer>
+
+<button id="toTop" type="button" aria-label="回到顶部">顶部</button>
+
+<script>
+(function(){
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('mainNav');
+  if(menuBtn && nav){
+    menuBtn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.textContent = open ? '收起' : '菜单';
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 760){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+        menuBtn.textContent = '菜单';
+      }
+    });
+  }
+
+  /* 本地查找 */
+  var input = document.getElementById('siteSearch');
+  var btn = document.getElementById('searchBtn');
+  var note = document.getElementById('searchNote');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card, .tight-list li, .comment, .faq, .rank li, .timeline li, .channels a, .steps li'));
+
+  function doSearch(){
+    var q = (input.value || '').trim().toLowerCase();
+    if(!q){
+      note.classList.remove('on');
+      note.textContent = '';
+      cards.forEach(function(c){ c.style.outline=''; });
+      return;
+    }
+    var hits = 0;
+    cards.forEach(function(c){
+      var t = (c.textContent || '').toLowerCase();
+      if(t.indexOf(q) > -1){
+        hits++;
+        c.style.outline = '2px solid #b5544a';
+      } else {
+        c.style.outline = '';
+      }
+    });
+    note.classList.add('on');
+    if(hits === 0){
+      note.textContent = '没有找到与“' + input.value.trim() + '”相关的内容，试试换编号（如 208）或场景词（如 老街）。';
+    } else {
+      note.textContent = '找到 ' + hits + ' 条相关条目，已用红色描边标出。';
+    }
+  }
+  if(btn && input){
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+    });
+    input.addEventListener('input', function(){
+      if(!input.value.trim()){ doSearch(); }
+    });
+  }
+
+  /* 回到顶部 */
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    if(window.scrollY > 600){ toTop.classList.add('show'); }
+    else { toTop.classList.remove('show'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  /* 侧栏滚动高亮 */
+  var sideLinks = Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var targets = sideLinks.map(function(a){
+    var id = a.getAttribute('href').split('#')[1];
+    return document.getElementById(id);
+  });
+  function highlight(){
+    var pos = window.scrollY + 150;
+    var idx = -1;
+    targets.forEach(function(el, i){
+      if(el && el.offsetTop <= pos){ idx = i; }
+    });
+    sideLinks.forEach(function(a, i){
+      a.classList.toggle('active', i === idx);
+    });
+  }
+  window.addEventListener('scroll', highlight, {passive:true});
+  window.addEventListener('resize', highlight);
+  highlight();
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"王雨纯mm131",
+  "description":"写真图集编号归档示例站，收录编号、张数、场景与修订记录。",
+  "inLanguage":"zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"No.172 为什么有两个版本？","acceptedAnswer":{"@type":"Answer","text":"No.172 在 9 月 21 日与 10 月 3 日各出现一次，9 月版 14 张、10 月版 22 张，目录名分别为 172_a 与 172_b。两版前 14 张画面一致，新增 8 张为同一窗边机位的连拍。"}},
+    {"@type":"Question","name":"张数多的期次一定内容更全吗？","acceptedAnswer":{"@type":"Answer","text":"不一定。张数只说明计数，内容是否完整要看目录与编号页是否一致。No.208 有 30 张，但第 12 张文件名缺序号；No.205 只有 24 张，目录一致性却是完整的。"}},
+    {"@type":"Question","name":"补图之后以哪一版为准？","acceptedAnswer":{"@type":"Answer","text":"以现版为准。No.203 在 10 月 12 日补图 6 张，由 17 张变为 23 张，编号页附了按原拍摄顺序补回中间帧的说明。"}},
+    {"@type":"Question","name":"合辑分册号怎么和主编号对应？","acceptedAnswer":{"@type":"Answer","text":"分册以主编号加连字符表示，如 No.128-1、No.128-2。归档时合计张数，但分册各自保留独立目录。"}},
+    {"@type":"Question","name":"编号页的布光标注有什么用？","acceptedAnswer":{"@type":"Answer","text":"用来复现拍摄条件。No.199 标注两盏柔光箱呈 45 度夹角，No.208 标注窗边自然光时段，这类信息在按场景检索时可作为区分依据。"}}
+  ]
+}
+</script>
+</body>
+                              </html>
