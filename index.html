@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>www.hsck123.com-站点索引与目录导航</title>
+<meta name="description" content="www.hsck123.com 是面向站长与网络工具的目录索引站，整理服务器测速、域名解析、SSL证书、建站工具与源码资源等分类条目，提供可核对的更新记录、使用说明与常见问题解答，方便按需检索。">
+<meta name="keywords" content="www.hsck123.com">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f3d5c'/%3E%3Cpath d='M16 22h32M16 32h20M16 42h26' stroke='%23f2b544' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"www.hsck123.com","description":"面向站长与网络工具的目录索引站，整理服务器测速、域名解析、SSL证书、建站工具与源码资源等分类条目。","inLanguage":"zh-CN"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"服务器测速节点应该选同省还是同运营商？","acceptedAnswer":{"@type":"Answer","text":"先看目标用户分布。访问者集中在华东电信，就选上海电信节点做基准，再补一个联通节点对照。同省但跨运营商的节点，延迟经常比邻省同运营商高 20 到 40 毫秒，单看同省会误判。"}},
+{"@type":"Question","name":"域名解析记录修改后多久生效？","acceptedAnswer":{"@type":"Answer","text":"取决于原记录的 TTL。TTL 设为 600 秒，理论上十分钟内全网刷新；设为 86400 秒，旧记录可能在缓存里留一天。修改前把 TTL 调到 300 至 600，等一个原 TTL 周期再改指向，切换会平滑很多。"}},
+{"@type":"Question","name":"免费 SSL 证书适合放在生产环境吗？","acceptedAnswer":{"@type":"Answer","text":"90 天有效期的免费证书可以用在生产环境，前提是自动续期任务可靠。证书到期前 30 天未续上，浏览器会直接拦截。对无法自动续期的老式虚拟主机，付费一年期证书更省事。"}},
+{"@type":"Question","name":"静态站和动态站目录该如何取舍？","acceptedAnswer":{"@type":"Answer","text":"内容更新频率决定。每月发几篇文章、没有登录和评论需求，静态站构建后上传即可，加载快、维护少；需要会员、订单、后台编辑，动态程序更合适，代价是要长期跟进补丁。"}},
+{"@type":"Question","name":"源码资源下载前要核对哪些信息？","acceptedAnswer":{"@type":"Answer","text":"先看版本号和最后提交日期，再看依赖清单是否完整。演示地址能打开、issue 区有维护者回复，说明项目还活着。缺依赖说明、演示打不开、最后更新停在两年前的包，装上去大概率要自己填坑。"}}
+]}
+</script>
+<style>
+:root{
+  --c-bg:#f6f7f4;
+  --c-surface:#ffffff;
+  --c-ink:#1b2430;
+  --c-ink-soft:#485565;
+  --c-line:#dde2dc;
+  --c-primary:#0f3d5c;
+  --c-primary-soft:#e3edf2;
+  --c-accent:#c98a12;
+  --c-accent-soft:#fbf1da;
+  --c-ok:#2c6e49;
+  --c-warn:#9d3b2f;
+  --radius-s:6px;
+  --radius-m:10px;
+  --radius-l:16px;
+  --shadow-s:0 1px 2px rgba(27,36,48,.08);
+  --shadow-m:0 6px 18px rgba(27,36,48,.09);
+  --sp-1:.35rem;
+  --sp-2:.7rem;
+  --sp-3:1.1rem;
+  --sp-4:1.6rem;
+  --sp-5:2.4rem;
+  --sp-6:3.4rem;
+  --fs-xs:.76rem;
+  --fs-s:.86rem;
+  --fs-m:1rem;
+  --fs-l:1.18rem;
+  --fs-xl:1.45rem;
+  --fs-2xl:1.9rem;
+  --fs-3xl:2.5rem;
+  --f-sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --sticky-h:104px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--sticky-h) + 12px)}
+body{margin:0;background:var(--c-bg);color:var(--c-ink);font-family:var(--f-sans);font-size:var(--fs-m);line-height:1.78;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--c-primary);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 var(--sp-2)}
+ul,ol{margin:0 0 var(--sp-2);padding-left:1.25rem}
+li{margin-bottom:.3rem}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--sp-3)}
+:focus-visible{outline:3px solid var(--c-accent);outline-offset:2px;border-radius:4px}
+
+/* 吸顶公告条 */
+.notice{position:sticky;top:0;z-index:60;background:var(--c-primary);color:#eaf1f5;font-size:var(--fs-s);border-bottom:1px solid rgba(255,255,255,.14)}
+.notice .wrap{display:flex;gap:var(--sp-2);align-items:center;flex-wrap:wrap;min-height:38px;padding-top:.3rem;padding-bottom:.3rem}
+.notice b{color:#fff}
+.notice .tag{background:var(--c-accent);color:#2b1d00;font-weight:700;padding:.05rem .45rem;border-radius:4px;font-size:var(--fs-xs);letter-spacing:.04em}
+.notice a{color:#ffe0a3}
+
+/* 页头 */
+.site-head{position:sticky;top:38px;z-index:55;background:rgba(255,255,255,.96);border-bottom:1px solid var(--c-line);backdrop-filter:blur(6px)}
+.head-in{display:flex;align-items:center;gap:var(--sp-3);min-height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.55rem;font-weight:800;color:var(--c-primary);font-size:var(--fs-l)}
+.brand svg{width:34px;height:34px;flex:none}
+.brand:hover{text-decoration:none}
+.nav-main{display:flex;gap:.15rem;flex-wrap:wrap;margin-left:auto;align-items:center}
+.nav-main a{font-size:var(--fs-s);color:var(--c-ink-soft);padding:.4rem .55rem;border-radius:var(--radius-s)}
+.nav-main a:hover{background:var(--c-primary-soft);color:var(--c-primary);text-decoration:none}
+.nav-main a.on{background:var(--c-primary);color:#fff}
+.head-tools{display:flex;gap:.4rem;align-items:center}
+.search-box{display:flex;align-items:center;border:1px solid var(--c-line);border-radius:999px;background:#fff;padding:.15rem .2rem .15rem .7rem}
+.search-box input{border:0;outline:none;font-family:inherit;font-size:var(--fs-s);width:140px;background:transparent;color:var(--c-ink)}
+.search-box button{border:0;background:var(--c-primary);color:#fff;font-family:inherit;font-size:var(--fs-xs);padding:.35rem .7rem;border-radius:999px;cursor:pointer}
+.search-box button:hover{background:#164f74}
+.menu-btn{display:none;border:1px solid var(--c-line);background:#fff;color:var(--c-primary);font-family:inherit;font-size:var(--fs-s);padding:.4rem .7rem;border-radius:var(--radius-s);cursor:pointer;align-items:center;gap:.35rem}
+.menu-btn svg{width:16px;height:16px}
+.search-out{font-size:var(--fs-xs);color:var(--c-ink-soft);padding:.25rem .7rem;display:none}
+.search-out.show{display:block}
+.search-out.empty{color:var(--c-warn)}
+
+/* 首屏 */
+.hero{position:relative;overflow:hidden;background:linear-gradient(150deg,#0f3d5c 0%,#155a80 58%,#1d7492 100%);color:#eef5f8;padding:var(--sp-6) 0 var(--sp-5)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--sp-5);align-items:center}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--fs-xs);letter-spacing:.14em;color:#ffd98a;border:1px solid rgba(255,217,138,.45);padding:.2rem .6rem;border-radius:999px}
+.hero h1{font-size:var(--fs-3xl);color:#fff;margin:var(--sp-3) 0 var(--sp-2);word-break:break-all}
+.hero p.lead{color:#d3e4ec;font-size:var(--fs-l);max-width:34em;margin-bottom:var(--sp-3)}
+.hero-acts{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:var(--sp-4)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border-radius:var(--radius-s);font-size:var(--fs-s);font-weight:600;border:1px solid transparent;transition:transform .18s ease,background .18s ease}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn-p{background:var(--c-accent);color:#2b1d00}
+.btn-p:hover{background:#e0a02a}
+.btn-g{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.45)}
+.btn-g:hover{background:rgba(255,255,255,.2)}
+.hero-stats{display:flex;gap:var(--sp-4);flex-wrap:wrap;font-size:var(--fs-s);color:#c6dbe5;list-style:none;padding:0;margin:0}
+.hero-stats b{display:block;color:#fff;font-size:var(--fs-xl);font-family:var(--f-mono);line-height:1.2}
+.hero-vis{position:relative;min-height:280px}
+.hero-vis svg{width:100%;height:auto;display:block;filter:drop-shadow(0 12px 24px rgba(0,0,0,.22))}
+.vis-note{position:absolute;bottom:-.4rem;left:0;font-size:var(--fs-xs);color:#a9c5d3}
+
+/* 主体布局 */
+.layout{display:grid;grid-template-columns:1fr 300px;gap:var(--sp-5);padding:var(--sp-5) 0}
+.main-col{min-width:0}
+.side-col{min-width:0}
+.sec{margin-bottom:var(--sp-6);scroll-margin-top:calc(var(--sticky-h) + 12px)}
+.sec-h{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;border-bottom:2px solid var(--c-primary);padding-bottom:.5rem;margin-bottom:var(--sp-3)}
+.sec-h h2{font-size:var(--fs-xl);color:var(--c-primary)}
+.sec-h .sub{font-size:var(--fs-xs);color:var(--c-ink-soft)}
+.sec-h .more{margin-left:auto;font-size:var(--fs-xs)}
+
+/* 概览 */
+.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3)}
+.ov-card{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--sp-3);box-shadow:var(--shadow-s)}
+.ov-card h3{font-size:var(--fs-m);color:var(--c-primary);margin-bottom:.3rem}
+.ov-card p{font-size:var(--fs-s);color:var(--c-ink-soft);margin:0}
+.ov-card .k{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--c-accent);display:block;margin-bottom:.2rem}
+
+/* 精选网格 */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-3)}
+.pick{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);overflow:hidden;box-shadow:var(--shadow-s);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.pick:hover{transform:translateY(-3px);box-shadow:var(--shadow-m)}
+.pick img{width:100%;height:132px;object-fit:cover}
+.pick .body{padding:var(--sp-3);flex:1;display:flex;flex-direction:column;gap:.3rem}
+.pick h3{font-size:var(--fs-m)}
+.pick h3 a{color:var(--c-ink)}
+.pick p{font-size:var(--fs-s);color:var(--c-ink-soft);margin:0;flex:1}
+.meta{font-size:var(--fs-xs);color:var(--c-ink-soft);display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.chip{display:inline-block;font-size:var(--fs-xs);background:var(--c-primary-soft);color:var(--c-primary);padding:.1rem .45rem;border-radius:4px}
+.chip.acc{background:var(--c-accent-soft);color:#7a5200}
+.chip.ok{background:#e2f0e8;color:var(--c-ok)}
+
+/* 紧凑列表 */
+.list-tight{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);overflow:hidden}
+.list-tight li{list-style:none;display:grid;grid-template-columns:74px 1fr auto;gap:.7rem;align-items:baseline;padding:.65rem var(--sp-3);border-bottom:1px solid var(--c-line);margin:0}
+.list-tight li:last-child{border-bottom:0}
+.list-tight ul{padding:0;margin:0}
+.list-tight .date{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--c-ink-soft)}
+.list-tight .t{font-size:var(--fs-s)}
+.list-tight .t a{color:var(--c-ink)}
+.list-tight .t a:hover{color:var(--c-primary)}
+.list-tight .lbl{font-size:var(--fs-xs);color:var(--c-accent);white-space:nowrap}
+
+/* 分类索引 */
+.cat-index{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:0;list-style:none}
+.cat-index li{margin:0}
+.cat-index a{display:inline-flex;align-items:center;gap:.4rem;background:var(--c-surface);border:1px solid var(--c-line);border-radius:999px;padding:.4rem .9rem;font-size:var(--fs-s);color:var(--c-ink)}
+.cat-index a:hover{border-color:var(--c-primary);color:var(--c-primary);text-decoration:none;background:var(--c-primary-soft)}
+.cat-index .n{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--c-accent)}
+
+/* 深度解析 */
+.article{background:var(--c-surface);border:1px solid var(--c-line);border-left:5px solid var(--c-primary);border-radius:var(--radius-m);padding:var(--sp-4)}
+.article h3{font-size:var(--fs-l);color:var(--c-primary);margin:var(--sp-4) 0 var(--sp-2)}
+.article h3:first-of-type{margin-top:var(--sp-2)}
+.article p{color:#2c3745}
+.article .callout{background:var(--c-accent-soft);border:1px dashed #e2c47c;border-radius:var(--radius-s);padding:var(--sp-3);font-size:var(--fs-s);margin:var(--sp-3) 0}
+.article .callout b{color:#7a5200}
+.article table{width:100%;border-collapse:collapse;font-size:var(--fs-s);margin:var(--sp-2) 0 var(--sp-3)}
+.article th,.article td{border:1px solid var(--c-line);padding:.45rem .6rem;text-align:left;vertical-align:top}
+.article th{background:var(--c-primary-soft);color:var(--c-primary)}
+.article code{font-family:var(--f-mono);font-size:.85em;background:#eef1ee;padding:.05rem .3rem;border-radius:4px}
+
+/* 步骤 */
+.steps{list-style:none;padding:0;margin:0;counter-reset:step;display:grid;gap:var(--sp-3)}
+.steps li{counter-increment:step;display:grid;grid-template-columns:42px 1fr;gap:var(--sp-3);background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--sp-3)}
+.steps li::before{content:counter(step);font-family:var(--f-mono);font-weight:700;color:#fff;background:var(--c-primary);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:var(--fs-s)}
+.steps h3{font-size:var(--fs-m);margin-bottom:.2rem}
+.steps p{font-size:var(--fs-s);color:var(--c-ink-soft);margin:0}
+
+/* 对照面板 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)}
+.cmp{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--sp-3)}
+.cmp.pro{border-top:4px solid var(--c-ok)}
+.cmp.con{border-top:4px solid var(--c-warn)}
+.cmp h3{font-size:var(--fs-m);margin-bottom:.4rem}
+.cmp ul{margin:0;padding-left:1.1rem;font-size:var(--fs-s);color:var(--c-ink-soft)}
+
+/* FAQ */
+.faq details{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-s);margin-bottom:.5rem;padding:0 .9rem}
+.faq details[open]{border-color:var(--c-primary);box-shadow:var(--shadow-s)}
+.faq summary{cursor:pointer;padding:.7rem 0;font-size:var(--fs-s);font-weight:600;color:var(--c-primary);list-style:none;display:flex;justify-content:space-between;gap:.6rem;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";font-family:var(--f-mono);color:var(--c-accent);font-size:var(--fs-m)}
+.faq details[open] summary::after{content:"－"}
+.faq .ans{font-size:var(--fs-s);color:var(--c-ink-soft);padding:0 0 .8rem}
+
+/* 评论 */
+.comments{display:grid;gap:var(--sp-3)}
+.cmt{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--sp-3);display:grid;grid-template-columns:44px 1fr;gap:.8rem}
+.avatar{width:44px;height:44px;border-radius:50%;background:var(--c-primary-soft);color:var(--c-primary);display:grid;place-items:center;font-weight:700;font-family:var(--f-mono)}
+.cmt .who{font-size:var(--fs-s);font-weight:600}
+.cmt .who span{font-weight:400;color:var(--c-ink-soft);font-size:var(--fs-xs);margin-left:.4rem;font-family:var(--f-mono)}
+.cmt p{font-size:var(--fs-s);margin:.2rem 0 0;color:#2c3745}
+.cmt .ref{font-size:var(--fs-xs);color:var(--c-accent);margin-top:.25rem}
+
+/* 相关推荐标签 */
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:0;list-style:none}
+.tags li{margin:0}
+.tags a{display:inline-block;font-size:var(--fs-s);border:1px solid var(--c-line);background:var(--c-surface);padding:.4rem .8rem;border-radius:var(--radius-s);color:var(--c-ink)}
+.tags a:hover{border-color:var(--c-accent);color:#7a5200;background:var(--c-accent-soft);text-decoration:none}
+
+/* 榜单 */
+.rank{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);overflow:hidden}
+.rank ol{list-style:none;margin:0;padding:0;counter-reset:rk}
+.rank li{counter-increment:rk;display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:.8rem;padding:.7rem var(--sp-3);border-bottom:1px solid var(--c-line)}
+.rank li:last-child{border-bottom:0}
+.rank li::before{content:counter(rk);font-family:var(--f-mono);font-weight:700;color:var(--c-primary);background:var(--c-primary-soft);width:26px;height:26px;border-radius:6px;display:grid;place-items:center;font-size:var(--fs-xs)}
+.rank li:nth-child(1)::before{background:var(--c-accent);color:#2b1d00}
+.rank .name{font-size:var(--fs-s)}
+.rank .val{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--c-ok)}
+
+/* 时间线 */
+.tl{list-style:none;padding:0;margin:0;border-left:2px solid var(--c-line);margin-left:.5rem}
+.tl li{position:relative;padding:0 0 var(--sp-3) var(--sp-4);margin:0}
+.tl li::before{content:"";position:absolute;left:-6px;top:.45rem;width:10px;height:10px;border-radius:50%;background:var(--c-primary);border:2px solid #fff;box-shadow:0 0 0 1px var(--c-primary)}
+.tl time{font-family:var(--f-mono);font-size:var(--fs-xs);color:var(--c-accent);display:block}
+.tl b{font-size:var(--fs-s)}
+.tl p{font-size:var(--fs-s);color:var(--c-ink-soft);margin:.1rem 0 0}
+
+/* 侧栏 */
+.side-card{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);padding:var(--sp-3);margin-bottom:var(--sp-3)}
+.side-card h3{font-size:var(--fs-m);color:var(--c-primary);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--c-line)}
+.side-nav{list-style:none;padding:0;margin:0;font-size:var(--fs-s)}
+.side-nav li{margin:0}
+.side-nav a{display:block;padding:.35rem .5rem;border-left:3px solid transparent;color:var(--c-ink-soft);border-radius:0 var(--radius-s) var(--radius-s) 0}
+.side-nav a:hover{background:var(--c-primary-soft);color:var(--c-primary);text-decoration:none}
+.side-nav a.active{border-left-color:var(--c-accent);background:var(--c-primary-soft);color:var(--c-primary);font-weight:600}
+.mini-list{list-style:none;padding:0;margin:0;font-size:var(--fs-s)}
+.mini-list li{padding:.4rem 0;border-bottom:1px dashed var(--c-line);margin:0}
+.mini-list li:last-child{border-bottom:0}
+.mini-list .meta{margin-top:.1rem}
+
+/* 页尾 */
+.site-foot{background:var(--c-primary);color:#c9dbe4;padding:var(--sp-5) 0 var(--sp-3);font-size:var(--fs-s)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--sp-4)}
+.site-foot h4{color:#fff;font-size:var(--fs-s);margin-bottom:.6rem}
+.site-foot a{color:#d9e7ee}
+.site-foot a:hover{color:#ffd98a}
+.site-foot ul{list-style:none;padding:0;margin:0}
+.site-foot ul li{margin-bottom:.35rem}
+.foot-brand{font-weight:800;color:#fff;font-size:var(--fs-l);display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.foot-brand svg{width:30px;height:30px}
+.foot-note{border-top:1px solid rgba(255,255,255,.16);margin-top:var(--sp-4);padding-top:var(--sp-3);display:flex;gap:var(--sp-3);flex-wrap:wrap;justify-content:space-between;font-size:var(--fs-xs);color:#a9c5d3}
+
+/* 回到顶部 */
+.to-top{position:fixed;right:16px;bottom:16px;width:44px;height:44px;border-radius:50%;background:var(--c-primary);color:#fff;border:0;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow-m);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:70}
+.to-top.show{opacity:1;pointer-events:auto}
+.to-top:hover{transform:translateY(-3px)}
+.to-top svg{width:20px;height:20px}
+
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:var(--sp-4)}
+  .hero-vis{display:none}
+  .layout{grid-template-columns:1fr}
+  .side-col{order:2}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .overview{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .nav-main{display:none;order:4;width:100%;flex-direction:column;align-items:stretch;gap:.1rem;padding-bottom:.6rem}
+  .nav-main.open{display:flex}
+  .nav-main a{padding:.55rem .6rem}
+  .menu-btn{display:inline-flex}
+  .head-in{position:relative}
+  .head-tools{margin-left:auto}
+  :root{--sticky-h:150px}
+}
+@media (max-width:620px){
+  :root{--fs-3xl:1.9rem;--fs-2xl:1.5rem;--fs-xl:1.28rem;--sticky-h:186px}
+  .grid-3,.grid-2,.overview,.compare{grid-template-columns:1fr}
+  .search-box input{width:104px}
+  .foot-grid{grid-template-columns:1fr}
+  .list-tight li{grid-template-columns:1fr auto;gap:.2rem}
+  .list-tight .date{grid-row:2}
+  .hero{padding:var(--sp-5) 0 var(--sp-4)}
+  .article{padding:var(--sp-3)}
+  .notice .wrap{min-height:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .btn:hover,.pick:hover,.to-top:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="notice" id="notice">
+  <div class="wrap">
+    <span class="tag">更新</span>
+    <b>www.hsck123.com</b>
+    <span>11 月 6 日新增「华东多线测速」与「DNSSEC 校验」两个目录分类，共 37 条条目；10 月 31 日下架失效镜像 12 条。</span>
+    <a href="/#latest">查看变更记录</a>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="/#top" aria-label="www.hsck123.com 首页">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0f3d5c"/><path d="M16 22h32M16 32h20M16 42h26" stroke="#f2b544" stroke-width="5" stroke-linecap="round"/><circle cx="46" cy="42" r="5" fill="#f2b544"/></svg>
+      <span>www.hsck123.com</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navMain">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      频道
+    </button>
+    <nav class="nav-main" id="navMain" aria-label="主题导航">
+      <a href="/#overview">目录概览</a>
+      <a href="/#picks">精选条目</a>
+      <a href="/#channels">分类索引</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">使用指南</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#comments">用户反馈</a>
+    </nav>
+    <div class="head-tools">
+      <div class="search-box">
+        <input type="search" id="q" placeholder="搜测速、证书、解析…" aria-label="站内条目搜索">
+        <button type="button" id="go">查找</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="search-out" id="out" role="status" aria-live="polite"></div></div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">目录 · 可核对 · 按需检索</span>
+        <h1>www.hsck123.com</h1>
+        <p class="lead">把服务器测速、域名解析、证书签发、建站工具、源码托管这些零散入口收进一张索引表，每条注明版本、最后核对日期和适用场景，方便按目标反查。</p>
+        <div class="hero-acts">
+          <a class="btn btn-p" href="/#picks">浏览精选条目 →</a>
+          <a class="btn btn-g" href="/#guide">按四步选型</a>
+        </div>
+        <ul class="hero-stats">
+          <li><b>11</b>目录频道</li>
+          <li><b>486</b>在架条目</li>
+          <li><b>37</b>本周新增</li>
+          <li><b>2026-11-08</b>最近核对</li>
+        </ul>
+      </div>
+      <div class="hero-vis" aria-hidden="true">
+        <svg viewBox="0 0 420 300" role="img">
+          <rect x="10" y="18" width="400" height="264" rx="16" fill="#0b2e45" opacity=".65"/>
+          <rect x="28" y="40" width="150" height="12" rx="6" fill="#f2b544"/>
+          <rect x="28" y="64" width="230" height="8" rx="4" fill="#5f93ad"/>
+          <rect x="28" y="82" width="180" height="8" rx="4" fill="#5f93ad"/>
+          <g>
+            <rect x="28" y="112" width="110" height="64" rx="8" fill="#134b6b" stroke="#2f7b9c"/>
+            <rect x="40" y="126" width="60" height="7" rx="3.5" fill="#8fc0d6"/>
+            <rect x="40" y="142" width="82" height="7" rx="3.5" fill="#4f89a5"/>
+            <rect x="40" y="158" width="44" height="7" rx="3.5" fill="#f2b544"/>
+          </g>
+          <g>
+            <rect x="152" y="112" width="110" height="64" rx="8" fill="#134b6b" stroke="#2f7b9c"/>
+            <rect x="164" y="126" width="70" height="7" rx="3.5" fill="#8fc0d6"/>
+            <rect x="164" y="142" width="56" height="7" rx="3.5" fill="#4f89a5"/>
+            <rect x="164" y="158" width="88" height="7" rx="3.5" fill="#4f89a5"/>
+          </g>
+          <g>
+            <rect x="276" y="112" width="112" height="64" rx="8" fill="#134b6b" stroke="#2f7b9c"/>
+            <rect x="288" y="126" width="48" height="7" rx="3.5" fill="#8fc0d6"/>
+            <rect x="288" y="142" width="90" height="7" rx="3.5" fill="#4f89a5"/>
+            <rect x="288" y="158" width="64" height="7" rx="3.5" fill="#f2b544"/>
+          </g>
+          <polyline points="40,224 108,208 176,216 244,196 312,204 388,180" fill="none" stroke="#f2b544" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="108" cy="208" r="3.5" fill="#f2b544"/>
+          <circle cx="244" cy="196" r="3.5" fill="#f2b544"/>
+          <circle cx="388" cy="180" r="3.5" fill="#f2b544"/>
+          <rect x="28" y="244" width="96" height="26" rx="6" fill="#f2b544"/>
+          <text x="76" y="262" text-anchor="middle" font-size="13" font-family="monospace" fill="#2b1d00">延迟 24ms</text>
+          <rect x="136" y="244" width="112" height="26" rx="6" fill="#1d7492"/>
+          <text x="192" y="262" text-anchor="middle" font-size="13" font-family="monospace" fill="#eaf6fa">证书 88 天</text>
+        </svg>
+        <span class="vis-note">抽样条目：测速面板与证书到期倒计时</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap layout">
+    <div class="main-col">
+
+      <section class="sec" id="overview">
+        <div class="sec-h"><h2>目录概览：三类入口的位置</h2><span class="sub">按用途而非按字母排列</span><a class="more" href="/#channels">全部频道 →</a></div>
+        <div class="overview">
+          <div class="ov-card"><span class="k">01 / 诊断</span><h3>服务器测速与线路</h3><p>华东多线、CN2 GIA、香港 BGP 三类节点共 96 个，标注运营商与回程路由，适合上线前压测。</p></div>
+          <div class="ov-card"><span class="k">02 / 接入</span><h3>域名解析与证书</h3><p>覆盖 A、AAAA、CNAME、MX、TXT 记录写法，以及 Let’s Encrypt 与商业证书的续期差异。</p></div>
+          <div class="ov-card"><span class="k">03 / 搭建</span><h3>建站程序与源码</h3><p>静态生成器、CMS、轻论坛三条线，条目附版本号、依赖清单与演示地址状态。</p></div>
+          <div class="ov-card"><span class="k">04 / 交付</span><h3>部署与对象存储</h3><p>对象存储、CDN 加速、自动部署流水线，重点标注免费额度和超量计费单价。</p></div>
+          <div class="ov-card"><span class="k">05 / 维护</span><h3>监控与备份</h3><p>可用性探测、日志归档、数据库定时备份，附常见误报阈值设置范围。</p></div>
+          <div class="ov-card"><span class="k">06 / 安全</span><h3>WAF 与漏洞公告</h3><p>规则集更新速度、误拦截反馈渠道，只收录公开可查的公告来源。</p></div>
+        </div>
+      </section>
+
+      <section class="sec" id="picks">
+        <div class="sec-h"><h2>精选条目：本周值得先看六个</h2><span class="sub">编辑按使用频率排序</span></div>
+        <div class="grid-3">
+          <article class="pick">
+            <img src="https://picsum.photos/seed/hsck-speed/480/280" width="480" height="280" loading="lazy" alt="测速面板展示多节点延迟曲线">
+            <div class="body">
+              <span class="chip acc">测速</span>
+              <h3><a href="/#latest">华东多线测速面板</a></h3>
+              <p>上海、杭州、南京三地电信与联通节点，支持 PING 与下载双指标，测试记录可导出 CSV。</p>
+              <div class="meta"><span>11-06 核对</span><span>9 个节点</span></div>
+            </div>
+          </article>
+          <article class="pick">
+            <img src="https://picsum.photos/seed/hsck-dns/480/280" width="480" height="280" loading="lazy" alt="DNS 记录配置表格与解析生效状态">
+            <div class="body">
+              <span class="chip">解析</span>
+              <h3><a href="/#deep">域名解析记录写法合集</a></h3>
+              <p>把 MX 优先级、SPF 与 DMARC 的 TXT 写法放在同一张表里，附 TTL 调整顺序。</p>
+              <div class="meta"><span>11-04 核对</span><span>6 类记录</span></div>
+            </div>
+          </article>
+          <article class="pick">
+            <img src="https://picsum.photos/seed/hsck-ssl/480/280" width="480" height="280" loading="lazy" alt="证书到期倒计时与自动续期任务列表">
+            <div class="body">
+              <span class="chip ok">证书</span>
+              <h3><a href="/#guide">SSL 证书自动续期清单</a></h3>
+              <p>90 天免费证书与一年期商业证书的续期命令对照，含 Nginx 重载步骤与失败重试次数。</p>
+              <div class="meta"><span>11-02 核对</span><span>8 条命令</span></div>
+            </div>
+          </article>
+          <article class="pick">
+            <img src="https://picsum.photos/seed/hsck-cms/480/280" width="480" height="280" loading="lazy" alt="建站程序后台文章列表界面">
+            <div class="body">
+              <span class="chip">建站</span>
+              <h3><a href="/#channels">轻量 CMS 版本对照表</a></h3>
+              <p>四个主流轻 CMS 的数据库依赖、插件数量与最近补丁日期并排列出，方便判断维护活跃度。</p>
+              <div class="meta"><span>11-01 核对</span><span>4 个项目</span></div>
+            </div>
+          </article>
+          <article class="pick">
+            <img src="https://picsum.photos/seed/hsck-code/480/280" width="480" height="280" loading="lazy" alt="源码仓库文件树与提交记录">
+            <div class="body">
+              <span class="chip acc">源码</span>
+              <h3><a href="/#latest">源码资源下载前核对项</a></h3>
+              <p>版本号、最后提交日期、依赖清单、演示地址四项状态，缺一项就在条目里打红色标记。</p>
+              <div class="meta"><span>10-30 核对</span><span>212 个条目</span></div>
+            </div>
+          </article>
+          <article class="pick">
+            <img src="https://picsum.photos/seed/hsck-monitor/480/280" width="480" height="280" loading="lazy" alt="可用性监控告警阈值设置面板">
+            <div class="body">
+              <span class="chip ok">监控</span>
+              <h3><a href="/#faq">可用性监控阈值设置</a></h3>
+              <p>3 次失败才告警、间隔 60 秒、超时 5 秒，这套组合在多数小型站点上误报明显偏少。</p>
+              <div class="meta"><span>10-29 核对</span><span>5 组预设</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="sec" id="latest">
+        <div class="sec-h"><h2>最新更新：十天内变更记录</h2><span class="sub">每条可回溯到核对人</span></div>
+        <div class="list-tight">
+          <ul>
+            <li><span class="date">11-06</span><span class="t"><a href="/#picks">华东多线测速面板新增杭州联通节点，旧节点下线两条</a></span><span class="lbl">测速</span></li>
+            <li><span class="date">11-05</span><span class="t"><a href="/#deep">TXT 记录写法表补入 DMARC p=quarantine 示例</a></span><span class="lbl">解析</span></li>
+            <li><span class="date">11-03</span><span class="t"><a href="/#guide">证书续期清单更新 Nginx 1.27 的 reload 参数</a></span><span class="lbl">证书</span></li>
+            <li><span class="date">11-01</span><span class="t"><a href="/#channels">轻量 CMS 对照表：两个项目停更，条目转为归档</a></span><span class="lbl">建站</span></li>
+            <li><span class="date">10-30</span><span class="t"><a href="/#rank">源码条目可信度分层重排，38 条下调一级</a></span><span class="lbl">源码</span></li>
+            <li><span class="date">10-28</span><span class="t"><a href="/#faq">监控阈值预设增加低流量站点一组</a></span><span class="lbl">监控</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sec" id="channels">
+        <div class="sec-h"><h2>分类索引：按目标直接跳</h2><span class="sub">11 个频道，括号为条目数</span></div>
+        <ul class="cat-index">
+          <li><a href="/#overview">服务器测速节点 <span class="n">96</span></a></li>
+          <li><a href="/#overview">域名解析记录 <span class="n">54</span></a></li>
+          <li><a href="/#overview">SSL 证书签发 <span class="n">41</span></a></li>
+          <li><a href="/#overview">静态生成器 <span class="n">33</span></a></li>
+          <li><a href="/#overview">轻量 CMS <span class="n">28</span></a></li>
+          <li><a href="/#overview">轻论坛程序 <span class="n">19</span></a></li>
+          <li><a href="/#overview">对象存储与 CDN <span class="n">47</span></a></li>
+          <li><a href="/#overview">自动部署流水线 <span class="n">36</span></a></li>
+          <li><a href="/#overview">可用性监控 <span class="n">25</span></a></li>
+          <li><a href="/#overview">备份与快照 <span class="n">31</span></a></li>
+          <li><a href="/#overview">WAF 与漏洞公告 <span class="n">76</span></a></li>
+        </ul>
+      </section>
+
+      <section class="sec" id="deep">
+        <div class="sec-h"><h2>深度解析：回程线路到底该怎么看</h2><span class="sub">全页唯一主体阅读区</span></div>
+        <article class="article">
+          <p>测速面板上那个「延迟 24ms」经常骗人。同样是上海机房，去程走 CN2 GIA、回程绕美国圣何塞再回上海，单次 PING 可能只有 30 毫秒出头，但上传大文件时速度掉到 200KB/s 以下。10 月 22 日到 10 月 26 日，用三条线路各跑了 5 轮 100MB 上传，差异比延迟数字明显得多。</p>
+
+          <h3>一、把测试拆成「去程 / 回程 / 丢包」三项</h3>
+          <p>只用 PING 平均值判断线路质量，错判率很高。可核对的拆分方式是：</p>
+          <table>
+            <thead><tr><th>指标</th><th>采集方法</th><th>10 月实测样本</th></tr></thead>
+            <tbody>
+              <tr><td>去程路由</td><td>从本地执行 <code>tracert</code> 记录前三跳 AS 号</td><td>A 线路 3 跳入境，B 线路 5 跳</td></tr>
+              <tr><td>回程路由</td><td>在服务器上 <code>mtr -r</code> 回本地 IP</td><td>A 线路 12 跳直回，C 线路经圣何塞 18 跳</td></tr>
+              <tr><td>丢包率</td><td>200 个 ICMP 包统计</td><td>A 0.5%，C 4.2%</td></tr>
+            </tbody>
+          </table>
+          <p>三项都记下来，再对照上传速度，判断才有依据。只测一项，结论很容易反过来。</p>
+
+          <h3>二、B 线路的「同省低延迟」是怎么回事</h3>
+          <p>10 月 25 日榜单里 B 线路标注上海电信，PING 平均值 18 毫秒，比 A 线路还低 6 毫秒。但当天 20:00 至 22:00 的抽样中，B 线路 TCP 重传率达到 6.8%，A 线路为 1.1%。原因是 B 线路省际出口在晚高峰拥塞，ICMP 优先级高于数据流，PING 好看、实际传输卡。这条判断可以反驳：如果只在凌晨测，B 线路的重传率会降到 2% 以内，结论就不同。测试时段要写进记录。</p>
+          <div class="callout"><b>可核对的说法：</b>「延迟低于 20 毫秒即为优质线路」这个说法只在单一指标下成立。补上重传率与回程跳数，B 线路在晚高峰的排序会掉到第三。</div>
+
+          <h3>三、2025 年到 2026 年的规则变化</h3>
+          <p>2025 年 3 月之前，多数测速站只给 PING 平均值；2026 年 10 月新版面板开始并列展示「平均值 / 抖动 / 丢包」三项。变化来自运营商侧：部分省际链路在 2025 年底调整了 QoS 策略，ICMP 与 TCP 的优先级差距拉大。条目里若仍只有单个延迟数字，参考价值已经下降。</p>
+
+          <h3>四、给不同用途的最小核对清单</h3>
+          <ul>
+            <li>放企业官网：回程跳数 ≤ 14，晚高峰重传率 ≤ 2%，证书剩余 ≥ 60 天。</li>
+            <li>放文件下载：上传与下载各测 100MB，取 5 轮中位数，不看单次峰值。</li>
+            <li>放 API 服务：抖动比平均值更重要，抖动超过 15 毫秒时，超时阈值要相应放宽。</li>
+          </ul>
+          <p>这三条不是通用标准，是从 10 月 22 日至 11 月 6 日共 19 组记录里归纳出来的下界。拿去用之前，先按自己的访问者分布换掉节点再测一遍。</p>
+        </article>
+      </section>
+
+      <section class="sec" id="guide">
+        <div class="sec-h"><h2>体验指南：从选型到上线四步</h2><span class="sub">每步给出可验收的结果</span></div>
+        <ol class="steps">
+          <li><div><h3>先定访问者分布，再选测速节点</h3><p>访问者七成在华南，就选广州电信与深圳联通，别用上海节点当基准。记录前三跳 AS 号，存成一张表。</p></div></li>
+          <li><div><h3>把解析 TTL 调到 300 秒再改指向</h3><p>等满一个原 TTL 周期后修改 A 记录，切换期间新旧 IP 并存。完成后观察 30 分钟解析生效比例。</p></div></li>
+          <li><div><h3>证书签发与自动续期一并配置</h3><p>Let’s Encrypt 90 天有效期，续期任务设在到期前 30 天。跑一次 <code>--dry-run</code> 确认命令无误，再开定时任务。</p></div></li>
+          <li><div><h3>上线后 48 小时内核对三项监控</h3><p>首页可用性、证书剩余天数、磁盘使用率。阈值先按 3 次失败告警，观察一周再收紧，避免开站初期误报刷屏。</p></div></li>
+        </ol>
+      </section>
+
+      <section class="sec" id="compare">
+        <div class="sec-h"><h2>对照面板：静态站与动态站</h2><span class="sub">按维护成本而非技术偏好</span></div>
+        <div class="compare">
+          <div class="cmp pro">
+            <h3>静态生成器更适合的场景</h3>
+            <ul>
+              <li>每月更新少于 30 篇，无需登录</li>
+              <li>构建产物可直接放对象存储，无运行环境补丁</li>
+              <li>页面首字节通常在 80 毫秒以内</li>
+              <li>搜索与评论需接第三方服务</li>
+            </ul>
+          </div>
+          <div class="cmp con">
+            <h3>动态程序仍不可替代的地方</h3>
+            <ul>
+              <li>会员、订单、后台编辑权限</li>
+              <li>内容需实时写入数据库并支持复杂查询</li>
+              <li>插件生态成熟，但补丁跟进要人力</li>
+              <li>数据库与缓存层增加故障面</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="faq">
+        <div class="sec-h"><h2>常见问题</h2><span class="sub">答案按领域对象组织</span></div>
+        <div class="faq">
+          <details>
+            <summary>服务器测速节点应该选同省还是同运营商？</summary>
+            <div class="ans">先看目标用户分布。访问者集中在华东电信，就选上海电信节点做基准，再补一个联通节点对照。同省但跨运营商的节点，延迟经常比邻省同运营商高 20 到 40 毫秒，单看同省会误判。</div>
+          </details>
+          <details>
+            <summary>域名解析记录修改后多久生效？</summary>
+            <div class="ans">取决于原记录的 TTL。TTL 设为 600 秒，理论上十分钟内全网刷新；设为 86400 秒，旧记录可能在缓存里留一天。修改前把 TTL 调到 300 至 600，等一个原 TTL 周期再改指向，切换会平滑很多。</div>
+          </details>
+          <details>
+            <summary>免费 SSL 证书适合放在生产环境吗？</summary>
+            <div class="ans">90 天有效期的免费证书可以用在生产环境，前提是自动续期任务可靠。证书到期前 30 天未续上，浏览器会直接拦截。对无法自动续期的老式虚拟主机，付费一年期证书更省事。</div>
+          </details>
+          <details>
+            <summary>静态站和动态站目录该如何取舍？</summary>
+            <div class="ans">内容更新频率决定。每月发几篇文章、没有登录和评论需求，静态站构建后上传即可，加载快、维护少；需要会员、订单、后台编辑，动态程序更合适，代价是要长期跟进补丁。</div>
+          </details>
+          <details>
+            <summary>源码资源下载前要核对哪些信息？</summary>
+            <div class="ans">先看版本号和最后提交日期，再看依赖清单是否完整。演示地址能打开、issue 区有维护者回复，说明项目还活着。缺依赖说明、演示打不开、最后更新停在两年前的包，装上去大概率要自己填坑。</div>
+          </details>
+          <details>
+            <summary>可用性监控告警频繁误报怎么办？</summary>
+            <div class="ans">把连续失败次数从 1 次调到 3 次，探测间隔拉长到 60 秒，超时阈值设 5 秒。多数误报来自单次网络抖动和探测节点自身故障，三个参数一起调，误报量通常下降一半以上。</div>
+          </details>
+        </div>
+      </section>
+
+      <section class="sec" id="comments">
+        <div class="sec-h"><h2>用户反馈：具体条目上的原话</h2><span class="sub">保留不同意见</span></div>
+        <div class="comments">
+          <div class="cmt"><div class="avatar" aria-hidden="true">陈</div><div><div class="who">陈工 <span>11-06 21:40</span></div><p>华东多线测速里杭州联通那个节点，晚八点跑出来重传率 5.9%，跟条目写的「≤2%」对不上。建议把测试时段标在结果旁边。</p><div class="ref">指向：华东多线测速面板</div></div></div>
+          <div class="cmt"><div class="avatar" aria-hidden="true">林</div><div><div class="who">林小满 <span>11-05 09:12</span></div><p>TXT 记录那张表救了我一命。之前 SPF 和 DMARC 混着写，邮件一直进垃圾箱，按表拆成两条记录后当天就恢复了。</p></div></div>
+          <div class="cmt"><div class="avatar" aria-hidden="true">赵</div><div><div class="who">赵子谦 <span>11-04 16:03</span></div><p>轻量 CMS 对照表里归档的那个项目我还在用，插件少但稳定，两年没出过事。归到「停更」有点一刀切。</p><div class="ref">指向：轻量 CMS 版本对照表</div></div></div>
+          <div class="cmt"><div class="avatar" aria-hidden="true">吴</div><div><div class="who">吴姓运维 <span>11-02 11:27</span></div><p>证书续期清单里的 reload 命令在 Nginx 1.27 上要加 <code>-s reload</code> 参数，旧写法会报错。已提反馈，条目 11-03 改了。</p><div class="ref">指向：SSL 证书自动续期清单</div></div></div>
+          <div class="cmt"><div class="avatar" aria-hidden="true">郑</div><div><div class="who">郑一鸣 <span>10-31 19:55</span></div><p>说句不太好听的，目录里有三分之一的测速节点我这边根本连不上，可能是地域限制。希望加个「可连通地区」字段。</p></div></div>
+          <div class="cmt"><div class="avatar" aria-hidden="true">何</div><div><div class="who">何夕 <span>10-29 08:41</span></div><p>监控阈值那组预设挺实用，3 次失败才告警，一周下来只响了一次，还是真的宕机。</p><div class="ref">指向：可用性监控阈值设置</div></div></div>
+        </div>
+      </section>
+
+      <section class="sec" id="rank">
+        <div class="sec-h"><h2>可信度分层：源码条目怎么分三级</h2><span class="sub">按可核对痕迹排序</span></div>
+        <div class="rank">
+          <ol>
+            <li><span class="name">有演示地址、有依赖清单、近 6 个月有提交</span><span class="val">一级 64 条</span></li>
+            <li><span class="name">有依赖清单、提交停在 6 至 18 个月之间</span><span class="val">二级 97 条</span></li>
+            <li><span class="name">缺依赖说明或演示失效，仅保留归档</span><span class="val">三级 51 条</span></li>
+            <li><span class="name">连续两次核对仍无法访问，转下架候选</span><span class="val">待处理 12 条</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="sec" id="timeline">
+        <div class="sec-h"><h2>相关资讯：十日时间线</h2><span class="sub">只记可查证的动作</span></div>
+        <ul class="tl">
+          <li><time>2026-11-06</time><b>测速频道完成杭州节点替换</b><p>新增联通节点 2 个，下线失效节点 2 个，条目数不变。</p></li>
+          <li><time>2026-11-03</time><b>证书续期清单修订</b><p>Nginx 重载命令按 1.27 版本改写，附失败重试上限 3 次。</p></li>
+          <li><time>2026-11-01</time><b>CMS 对照表调整状态</b><p>两个项目停更超过 24 个月，从在架转为归档。</p></li>
+          <li><time>2026-10-30</time><b>源码可信度分层重排</b><p>38 条条目下调一级，主要原因是演示地址失效。</p></li>
+          <li><time>2026-10-26</time><b>回程线路测试完成</b><p>三条线路各 5 轮 100MB 上传，记录存档，用于深度解析。</p></li>
+        </ul>
+      </section>
+
+      <section class="sec" id="related">
+        <div class="sec-h"><h2>相关推荐：长尾检索词</h2><span class="sub">点开即对应条目组</span></div>
+        <ul class="tags">
+          <li><a href="/#overview">CN2 GIA 回程路由怎么看</a></li>
+          <li><a href="/#overview">DMARC 记录写法示例</a></li>
+          <li><a href="/#overview">Let’s Encrypt 自动续期失败排查</a></li>
+          <li><a href="/#overview">Nginx 1.27 reload 命令变化</a></li>
+          <li><a href="/#overview">静态博客生成器构建速度对比</a></li>
+          <li><a href="/#overview">对象存储免费额度与超量单价</a></li>
+          <li><a href="/#overview">可用性监控误报阈值组合</a></li>
+          <li><a href="/#overview">源码项目是否仍在维护的判断</a></li>
+          <li><a href="/#overview">轻论坛程序数据库依赖</a></li>
+        </ul>
+      </section>
+
+    </div>
+
+    <aside class="side-col" aria-label="侧栏导航与摘要">
+      <div class="side-card">
+        <h3>本页栏目</h3>
+        <ul class="side-nav" id="sideNav">
+          <li><a href="/#overview">目录概览</a></li>
+          <li><a href="/#picks">精选条目</a></li>
+          <li><a href="/#latest">最新更新</a></li>
+          <li><a href="/#channels">分类索引</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#compare">对照面板</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">用户反馈</a></li>
+          <li><a href="/#rank">可信度分层</a></li>
+          <li><a href="/#timeline">相关资讯</a></li>
+          <li><a href="/#related">相关推荐</a></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>核对提示</h3>
+        <ul class="mini-list">
+          <li>晚高峰数据以 20:00—22:00 为准<div class="meta"><span class="chip acc">测速</span></div></li>
+          <li>解析改动前先降 TTL 至 300 秒<div class="meta"><span class="chip">解析</span></div></li>
+          <li>证书剩余低于 30 天立即查续期任务<div class="meta"><span class="chip ok">证书</span></div></li>
+          <li>源码条目缺依赖清单视作三级<div class="meta"><span class="chip acc">源码</span></div></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>样本说明</h3>
+        <p style="font-size:var(--fs-xs);color:var(--c-ink-soft);margin:0">条目版本、节点数与测试记录均为示例数据，用于展示目录结构；实际选型请以目标服务商当前公布的信息为准。</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#f2b544"/><path d="M16 22h32M16 32h20M16 42h26" stroke="#0f3d5c" stroke-width="5" stroke-linecap="round"/><circle cx="46" cy="42" r="5" fill="#0f3d5c"/></svg>
+          <span>www.hsck123.com</span>
+        </div>
+        <p style="margin:0;font-size:var(--fs-xs);color:#a9c5d3">给站长和网络工具使用者的一张索引表，按目标反查，每条标注核对日期。</p>
+      </div>
+      <div>
+        <h4>诊断与接入</h4>
+        <ul>
+          <li><a href="/#overview">服务器测速节点</a></li>
+          <li><a href="/#overview">域名解析记录</a></li>
+          <li><a href="/#overview">SSL 证书签发</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>搭建与交付</h4>
+        <ul>
+          <li><a href="/#overview">静态生成器</a></li>
+          <li><a href="/#overview">轻量 CMS</a></li>
+          <li><a href="/#overview">对象存储与 CDN</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>维护与安全</h4>
+        <ul>
+          <li><a href="/#overview">可用性监控</a></li>
+          <li><a href="/#overview">备份与快照</a></li>
+          <li><a href="/#overview">WAF 与漏洞公告</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>页面更新时间 2026-11-08，对应「最新更新」中 11-06 至 10-28 共 6 条变更。</span>
+      <span>条目数据为示例；版权 © 2026 www.hsck123.com</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuBtn');
+  var nav=document.getElementById('navMain');
+  menuBtn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      if(window.innerWidth<=960){nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}
+    });
+  });
+
+  var toTop=document.getElementById('toTop');
+  var onScroll=function(){
+    if(window.scrollY>520){toTop.classList.add('show');}else{toTop.classList.remove('show');}
+  };
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  var sideLinks=Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var targets=sideLinks.map(function(a){return document.querySelector(a.getAttribute('href').replace('/',''));});
+  var highlight=function(){
+    var pos=window.scrollY+ (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sticky-h'))||120) + 40;
+    var idx=-1;
+    for(var i=0;i<targets.length;i++){
+      if(targets[i] && targets[i].offsetTop<=pos){idx=i;}
+    }
+    sideLinks.forEach(function(a,i){a.classList.toggle('active',i===idx);});
+  };
+  window.addEventListener('scroll',highlight,{passive:true});
+  highlight();
+
+  var input=document.getElementById('q');
+  var out=document.getElementById('out');
+  var nodes=Array.prototype.slice.call(document.querySelectorAll('.main-col h2, .main-col h3, .main-col li, .main-col p, .main-col summary'));
+  function doSearch(){
+    var kw=input.value.trim().toLowerCase();
+    out.classList.remove('empty');
+    if(!kw){out.classList.remove('show');out.textContent='';return;}
+    var hits=[];
+    nodes.forEach(function(n){
+      var t=(n.textContent||'').toLowerCase();
+      if(t.indexOf(kw)>-1 && hits.length<8){
+        var label=(n.textContent||'').trim().replace(/\s+/g,' ');
+        hits.push(label.length>46?label.slice(0,46)+'…':label);
+      }
+    });
+    out.classList.add('show');
+    if(hits.length===0){
+      out.classList.add('empty');
+      out.textContent='没有找到与「'+input.value.trim()+'」匹配的条目，换个写法试试，例如「证书」「测速」「解析」。';
+    }else{
+      out.textContent='找到 '+hits.length+' 条相关：「'+hits.join('」；「')+'」';
+    }
+  }
+  document.getElementById('go').addEventListener('click',doSearch);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();doSearch();}});
+  input.addEventListener('input',function(){if(!input.value.trim()){out.classList.remove('show');out.textContent='';}});
+})();
+</script>
+</body>
+</html>
